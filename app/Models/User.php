@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -29,6 +32,7 @@ class User extends Authenticatable
         'avatar',
         'birth_day',
         'password',
+        'description',
     ];
 
     /**
@@ -53,5 +57,40 @@ class User extends Authenticatable
             'birth_day' => 'date',
             'password' => 'hashed',
         ];
+    }
+
+    public function trainers(): HasMany
+    {
+        return $this->hasMany(Trainer::class);
+    }
+
+    public function activities(): BelongsToMany
+    {
+        return $this->belongsToMany(Activity::class, 'activity_user');
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(RoleEnum::ADMIN->value);
+    }
+
+    public function isManager(): bool
+    {
+        return $this->hasRole(RoleEnum::MANAGER->value);
+    }
+
+    public function isClient(): bool
+    {
+        return $this->hasRole(RoleEnum::CLIENT->value);
+    }
+
+    public function isTrainer(): bool
+    {
+        return $this->hasRole(RoleEnum::TRAINER->value);
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->name.' '.$this->last_name;
     }
 }

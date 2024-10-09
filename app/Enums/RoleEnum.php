@@ -7,6 +7,7 @@ enum RoleEnum: string
     case USER = 'user';
     case ADMIN = 'admin';
     case MANAGER = 'manager';
+    case TRAINER = 'trainer';
     case CLIENT = 'client';
 
     /**
@@ -15,10 +16,11 @@ enum RoleEnum: string
     public static function allValues(): array
     {
         return [
+            self::CLIENT->value,
+            self::TRAINER->value,
+            self::MANAGER->value,
             self::USER->value,
             self::ADMIN->value,
-            self::MANAGER->value,
-            self::CLIENT->value,
         ];
     }
 
