@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\GenderEnum;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -56,11 +58,34 @@ class UserResource extends Resource
                             ->label(trans('dashboard.name'))
                             ->required(),
 
+                        TextInput::make('last_name')
+                            ->label(trans('dashboard.last_name'))
+                            ->required(),
+
+                        TextInput::make('middle_name')
+                            ->label(trans('dashboard.middle_name')),
+
                         TextInput::make('email')
                             ->label(trans('dashboard.email'))
                             ->required()
                             ->email()
                             ->unique(table: static::$model, ignorable: fn ($record) => $record),
+
+                        TextInput::make('phone')
+                            ->label(trans('dashboard.phone'))
+                            ->required()
+                            ->unique(table: static::$model, ignorable: fn ($record) => $record),
+
+                        DatePicker::make('birth_day')
+                            ->label(trans('dashboard.birth_day'))
+                            ->date()
+                            ->required(),
+
+                        Select::make('gender')
+                            ->label(trans('dashboard.gender'))
+                            ->required()
+                            ->options(GenderEnum::allValuesTranslated())
+                            ->preload(),
 
                         TextInput::make('password')
                             ->label(trans('dashboard.password'))
@@ -97,19 +122,19 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('email')
-                    ->label(trans('dashboard.email'))
+                TextColumn::make('last_name')
+                    ->label(trans('dashboard.last_name'))
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('phone')
+                    ->label(trans('dashboard.phone'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('roles.name')
                     ->label(trans('dashboard.roles'))
                     ->listWithLineBreaks(),
-
-                TextColumn::make('email_verified_at')
-                    ->label(trans('dashboard.email_verified_at'))
-                    ->dateTime('d.m.Y H:i')
-                    ->sortable(),
 
                 TextColumn::make('created_at')
                     ->label(trans('dashboard.created'))
@@ -118,7 +143,9 @@ class UserResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('role')
+                    ->label(trans('dashboard.roles'))
                     ->multiple()
+                    ->preload()
                     ->relationship('roles', 'name')
             ])
             ->actions([
