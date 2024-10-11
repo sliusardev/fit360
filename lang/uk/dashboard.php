@@ -175,4 +175,5 @@ return array (
     'team' => 'Команда',
     'activity' => 'Заняття',
     'activities' => 'Заняття',
+    'join' => 'Приєднатися',
 );

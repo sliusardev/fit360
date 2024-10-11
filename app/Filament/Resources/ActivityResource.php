@@ -28,7 +28,7 @@ class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
     protected static ?int $navigationSort = 2;
 
@@ -75,7 +75,9 @@ class ActivityResource extends Resource
                             ->label(trans('dashboard.description')),
 
                         DateTimePicker::make('start_time')
-                            ->label(trans('dashboard.start_time')),
+                            ->label(trans('dashboard.start_time'))
+                            ->minDate(now()->toDateString())
+                            ->seconds(false),
 
                         TextInput::make('duration_minutes')
                             ->label(trans('dashboard.duration_minutes'))
@@ -97,7 +99,9 @@ class ActivityResource extends Resource
                             ->image()
                             ->columnSpanFull(),
 
-                    ])->columns(1)
+                    ])
+                    ->collapsible()
+                    ->columns(1)
             ]);
     }
 
@@ -149,7 +153,7 @@ class ActivityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\UsersRelationManager::class
         ];
     }
 
