@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Middleware\ClientMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +14,7 @@ Route::get('/activity', [ActivityController::class, 'index'])
 Route::get('/activity/list', [ActivityController::class, 'list'])
     ->name('activity-list');
 Route::get('/activity/my', [ActivityController::class, 'my'])
+    ->middleware(ClientMiddleware::class)
     ->name('activity-my');
 Route::get('/activity/{id}', [ActivityController::class, 'show'])
     ->name('activity-show');
