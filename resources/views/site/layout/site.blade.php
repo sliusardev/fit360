@@ -37,6 +37,8 @@
 <body>
 
 <div class="container my-4">
+    <x-admin-top-line/>
+
     <div class="text-center my-4">
         <div>
             <a href="/">
