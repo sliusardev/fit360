@@ -76,7 +76,7 @@
                 @endif
             @endif
 
-            @if(auth()->user()->isAdmin()  && auth()->user()->isTrainer())
+            @if(auth()->user()->isAdmin() || auth()->user()->isTrainer())
 
                 <div class="my-4 p-3">
                     <h3>Приєднані клієнти</h3>
