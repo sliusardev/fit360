@@ -84,6 +84,7 @@ class TrainerResource extends Resource
                             ->label(trans('dashboard.avatar'))
                             ->directory('users')
                             ->image()
+                            ->imageEditor()
                             ->columnSpanFull(),
 
                     ])->columns(1)

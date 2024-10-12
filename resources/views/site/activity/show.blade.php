@@ -12,18 +12,23 @@
         <hr>
         <div class="p-5 text-center">
             <h2>Тренери</h2>
+            <div class="row">
+                @foreach($activity->trainers as $trainer)
 
-            @foreach($activity->trainers as $trainer)
-                <div class="my-2 p-2">
+                    <a href="{{route('trainer.show', $trainer->id)}}" class="col-6">
+                        <div class="my-2 p-2" >
 
-                    @if($trainer->avatar)
-                        <img src="/storage/{{$trainer->avatar}}" class="" alt="{{$trainer->name}}" style="width: 50px;">
-                    @endif
+                            @if($trainer->avatar)
+                                <img src="/storage/{{$trainer->avatar}}" class="" alt="{{$trainer->name}}" style="width: 50px; border-radius:5px; overflow: hidden">
+                            @endif
 
-                    <span class="mx-3">{{$trainer->name}}</span>
-                </div>
+                            <div class="mx-3">{{$trainer->name}}</div>
+                        </div>
+                    </a>
 
-            @endforeach
+                @endforeach
+            </div>
+
 
         </div>
         <div class="row text-center">
@@ -58,13 +63,13 @@
             @if(!$activity->isOld())
                 @if(auth()->user()->hasActivity($activity->id))
                     <div class="text-center">
-                        <a href="{{route('activity-cancel-join', $activity->id)}}">
+                        <a href="{{route('activity.cancelJoin', $activity->id)}}">
                             <button type="button" style="width: 100%" class="btn btn-danger">Відмінити</button>
                         </a>
                     </div>
                 @else
                     <div class="text-center">
-                        <a href="{{route('activity-join', $activity->id)}}">
+                        <a href="{{route('activity.join', $activity->id)}}">
                             <button type="button" style="width: 100%" class="btn btn-dark">Приєднатися</button>
                         </a>
                     </div>

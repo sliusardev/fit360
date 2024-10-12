@@ -5,7 +5,7 @@
     <div class="row">
         @foreach($activities as $activity)
             <div class="my-2">
-                <a href="{{route('activity-show', $activity->id)}}" class="link">
+                <a href="{{route('activity.show', $activity->id)}}" class="link">
                     <div class="card">
 
                         <div class="card-body">

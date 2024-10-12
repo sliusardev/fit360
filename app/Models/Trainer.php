@@ -29,4 +29,9 @@ class Trainer extends Model
     {
         return $this->belongsToMany(Activity::class, 'activity_trainer');
     }
+
+    public function getImageUrl(): string
+    {
+        return '/storage/'.$this->avatar;
+    }
 }
