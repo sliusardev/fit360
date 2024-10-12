@@ -9,7 +9,8 @@ class TrainerController extends Controller
 {
     public function index()
     {
-        return back();
+        $trainers = Trainer::all();
+        return view('site.trainer.index', compact('trainers'));
     }
 
     public function show($id)

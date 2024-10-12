@@ -24,6 +24,15 @@
                     </div>
                 </a>
             </div>
+            <div class="col-12 col-md-6 my-3 text-decoration-none">
+                <a href="{{route('trainer.index')}}" class="link">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Тренери</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
