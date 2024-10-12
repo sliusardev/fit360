@@ -17,7 +17,7 @@
                 <div class="my-2 p-2">
 
                     @if($trainer->avatar)
-                        <img src="/storage/{{$trainer->avatar}}" class="" alt="{{$trainer->name}}" style="width: 50px; border-radius: 50%">
+                        <img src="/storage/{{$trainer->avatar}}" class="" alt="{{$trainer->name}}" style="width: 50px;">
                     @endif
 
                     <span class="mx-3">{{$trainer->name}}</span>
@@ -55,20 +55,21 @@
         </div>
 
         @auth()
-            @if(auth()->user()->hasActivity($activity->id))
-                <div class="text-center">
-                    <a href="{{route('activity-cancel-join', $activity->id)}}">
-                        <button type="button" style="width: 100%" class="btn btn-danger">Відмінити</button>
-                    </a>
-                </div>
-            @else
-                <div class="text-center">
-                    <a href="{{route('activity-join', $activity->id)}}">
-                        <button type="button" style="width: 100%" class="btn btn-dark">Приєднатися</button>
-                    </a>
-                </div>
+            @if(!$activity->isOld())
+                @if(auth()->user()->hasActivity($activity->id))
+                    <div class="text-center">
+                        <a href="{{route('activity-cancel-join', $activity->id)}}">
+                            <button type="button" style="width: 100%" class="btn btn-danger">Відмінити</button>
+                        </a>
+                    </div>
+                @else
+                    <div class="text-center">
+                        <a href="{{route('activity-join', $activity->id)}}">
+                            <button type="button" style="width: 100%" class="btn btn-dark">Приєднатися</button>
+                        </a>
+                    </div>
+                @endif
             @endif
-
 
             @if(auth()->user()->isAdmin()  && auth()->user()->isTrainer())
 

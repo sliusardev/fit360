@@ -53,4 +53,9 @@ class Activity extends Model
         return $this->available_slots - $clients;
     }
 
+    public function isOld(): bool
+    {
+        return $this->start_time < now();
+    }
+
 }
