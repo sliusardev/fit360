@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -52,6 +53,13 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('see_on_site')
+                    ->label(trans('dashboard.see_on_site'))
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (): string => '/')
+                    ->openUrlInNewTab()
             ])
             ->authMiddleware([
                 Authenticate::class,
