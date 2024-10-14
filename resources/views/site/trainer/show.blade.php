@@ -8,7 +8,7 @@
         </div>
         <div>
             <h3>Спеціалізація:</h3>
-            {{$trainer->specialization}}
+            {!! $trainer->specialization !!}
         </div>
     </div>
 @endsection
