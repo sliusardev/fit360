@@ -11,7 +11,7 @@
             {!! $trainer->specialization !!}
         </div>
 
-        <div>
+        <div class="my-3">
             <h3>Інформація:</h3>
             {!! $trainer->description !!}
         </div>
