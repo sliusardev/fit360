@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 class Activity extends Model
 {
@@ -13,6 +15,7 @@ class Activity extends Model
 
     protected $fillable = [
         'title',
+        'user_id',
         'location',
         'description',
         'start_time',
@@ -21,14 +24,21 @@ class Activity extends Model
         'room',
         'price',
         'discount',
-        'image'
+        'image',
+        'is_enabled',
     ];
 
     protected function casts(): array
     {
         return [
-            'start_time' => 'datetime'
+            'start_time' => 'datetime',
+            'is_enabled' => 'boolean',
         ];
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function users(): BelongsToMany
@@ -66,6 +76,12 @@ class Activity extends Model
     public function getImageUrl(): string
     {
         return !empty($this->image) ? '/storage/'.$this->image : '';
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('is_enabled', true)
+            ->where('created_at', '<=',Carbon::now());
     }
 
 }

@@ -66,6 +66,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Trainer::class);
     }
 
+    public function createdActivities(): HasMany
+    {
+        return $this->hasMany(Activity::class);
+    }
+
     public function activities(): BelongsToMany
     {
         return $this->belongsToMany(Activity::class, 'activity_user');
