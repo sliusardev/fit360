@@ -43,7 +43,12 @@ class Activity extends Model
 
     public function scopeNotStarted(Builder $query): void
     {
-        $query->where('start_time', '>', now());
+        $query->where('start_time', '>=', now());
+    }
+
+    public function scopeOld(Builder $query): void
+    {
+        $query->where('start_time', '<', now());
     }
 
     public function getFreeSlots()

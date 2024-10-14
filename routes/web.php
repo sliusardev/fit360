@@ -21,6 +21,10 @@ Route::prefix('activity')->group(function () {
         ->middleware(ClientMiddleware::class)
         ->name('activity.my');
 
+    Route::get('/my-archive', [ActivityController::class, 'myArchive'])
+        ->middleware(ClientMiddleware::class)
+        ->name('activity.myArchive');
+
     Route::get('/{id}', [ActivityController::class, 'show'])
         ->name('activity.show');
 

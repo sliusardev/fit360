@@ -25,11 +25,16 @@ class ActivityController extends Controller
 
     public function my()
     {
-        $activities = auth()->user()->activities()->get();
-
-//        dd($activities);
+        $activities = auth()->user()->activities()->notStarted()->get();
 
         return view('site.activity.my', compact('activities'));
+    }
+
+    public function myArchive()
+    {
+        $activities = auth()->user()->activities()->old()->get();
+
+        return view('site.activity.my-archive', compact('activities'));
     }
 
     public function show($id)
