@@ -9,6 +9,13 @@
         <div class="p-3">
             <h4>{{$activity->title}}</h4>
         </div>
+
+        @if($activity->getImageUrl())
+            <div class="p-3 text-center">
+                <img class="img-fluid" src="{{$activity->getImageUrl()}}" alt="{{$activity->title}}" style="max-height: 400px;">
+            </div>
+        @endif
+
         <hr>
         <div class="p-5 text-center">
             <h2>Тренери</h2>

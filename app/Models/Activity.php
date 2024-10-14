@@ -63,4 +63,9 @@ class Activity extends Model
         return $this->start_time < now();
     }
 
+    public function getImageUrl(): string
+    {
+        return !empty($this->image) ? '/storage/'.$this->image : '';
+    }
+
 }

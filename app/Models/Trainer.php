@@ -32,6 +32,6 @@ class Trainer extends Model
 
     public function getImageUrl(): string
     {
-        return '/storage/'.$this->avatar;
+        return !empty($this->avatar) ? '/storage/'.$this->avatar : '';
     }
 }

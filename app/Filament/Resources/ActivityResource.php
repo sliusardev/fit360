@@ -97,6 +97,7 @@ class ActivityResource extends Resource
                             ->label(trans('dashboard.image'))
                             ->directory('activities')
                             ->image()
+                            ->imageEditor()
                             ->columnSpanFull(),
 
                     ])
