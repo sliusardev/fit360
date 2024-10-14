@@ -123,12 +123,15 @@ class ActivityResource extends Resource
                     ->bulleted(),
 
                 TextColumn::make('start_time')
+                    ->sortable()
                     ->label(trans('dashboard.start_time')),
 
                 TextColumn::make('available_slots')
+                    ->sortable()
                     ->label(trans('dashboard.available_slots')),
 
                 TextColumn::make('price')
+                    ->sortable()
                     ->label(trans('dashboard.price')),
 
 
@@ -138,16 +141,17 @@ class ActivityResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\ReplicateAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\ViewAction::make(),
                 ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('start_time', 'desc');
     }
 
     public static function getRelations(): array

@@ -135,6 +135,7 @@ class UserResource extends Resource
 
                 TextColumn::make('roles.name')
                     ->label(trans('dashboard.roles'))
+                    ->sortable()
                     ->listWithLineBreaks(),
 
                 TextColumn::make('created_at')
