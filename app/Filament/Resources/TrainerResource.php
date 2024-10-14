@@ -67,7 +67,7 @@ class TrainerResource extends Resource
                             ->label(trans('dashboard.name'))
                             ->required(),
 
-                        Textarea::make('specialization')
+                        RichEditor::make('specialization')
                             ->label(trans('dashboard.specialization')),
 
                         RichEditor::make('description')
