@@ -11,9 +11,12 @@
             {!! $trainer->specialization !!}
         </div>
 
-        <div class="my-3">
-            <h3>Інформація:</h3>
-            {!! $trainer->description !!}
-        </div>
+        @if(!empty($trainer->description))
+            <div class="my-3">
+                <h3>Інформація:</h3>
+                {!! $trainer->description !!}
+            </div>
+        @endif
+
     </div>
 @endsection
