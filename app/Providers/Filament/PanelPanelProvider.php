@@ -34,7 +34,7 @@ class PanelPanelProvider extends PanelProvider
             ->brandName('Fit360')
             ->profile()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Gray,
             ])
             ->maxContentWidth('full')
             ->sidebarCollapsibleOnDesktop()
