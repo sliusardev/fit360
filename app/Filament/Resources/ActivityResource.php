@@ -22,6 +22,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -134,6 +135,7 @@ class ActivityResource extends Resource
 
                 TextColumn::make('start_time')
                     ->sortable()
+                    ->dateTime('d.m.Y H:i')
                     ->label(trans('dashboard.start_time')),
 
                 TextColumn::make('available_slots')
@@ -146,7 +148,20 @@ class ActivityResource extends Resource
                     ->label(trans('dashboard.price')),
             ])
             ->filters([
-                //
+                Filter::make('only_enabled')
+                    ->label(trans('dashboard.only_enabled'))
+                    ->query(fn (Builder $query): Builder => $query->active())
+                    ->toggle(),
+
+                Filter::make('finished')
+                    ->label(trans('dashboard.finished'))
+                    ->query(fn (Builder $query): Builder => $query->old())
+                    ->toggle(),
+
+                Filter::make('not_started')
+                    ->label(trans('dashboard.not_started'))
+                    ->query(fn (Builder $query): Builder => $query->notStarted())
+                    ->toggle(),
             ])
             ->actions([
                 ActionGroup::make([

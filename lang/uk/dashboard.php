@@ -176,4 +176,6 @@ return array (
     'activity' => 'Заняття',
     'activities' => 'Заняття',
     'join' => 'Приєднатися',
+    'finished' => 'Завершені',
+    'not_started' => 'Ще не почалися',
 );

@@ -56,6 +56,11 @@ class Activity extends Model
         $query->where('start_time', '>=', now());
     }
 
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('is_enabled', true);
+    }
+
     public function scopeOld(Builder $query): void
     {
         $query->where('start_time', '<', now());
@@ -78,9 +83,14 @@ class Activity extends Model
         return !empty($this->image) ? '/storage/'.$this->image : '';
     }
 
-    public function scopeActive(Builder $query): void
+    public function date()
     {
-        $query->where('is_enabled', true);
+        return $this->created_at->format('d.m.Y');
+    }
+
+    public function dateTime()
+    {
+        return $this->created_at->format('d.m.Y H:i');
     }
 
 }
