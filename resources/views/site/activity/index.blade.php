@@ -29,7 +29,7 @@
                 <a href="{{route('activity.myArchive')}}" class="link">
                     <div class="card">
                         <div class="card-body">
-                            <h4>Завершені</h4>
+                            <h4>Moї Завершені</h4>
                         </div>
                     </div>
                 </a>
