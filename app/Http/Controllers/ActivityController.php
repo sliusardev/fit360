@@ -45,6 +45,10 @@ class ActivityController extends Controller
             ->with('users', 'trainers')
             ->where('id', $id)->first();
 
+        if (!$activity) {
+            return redirect('/');
+        }
+
         return view('site.activity.show', compact('activity'));
     }
 
@@ -52,23 +56,24 @@ class ActivityController extends Controller
     {
         $activity = Activity::query()->where('id', $id)->first();
 
-        if($activity) {
-            $activity->users()->attach(auth()->id());
-            return back()->with('success', 'Успишно приєднано!');
+        if(!$activity) {
+            return back()->with('error', 'Немає такого заняття');
         }
 
-        return back()->with('error', 'Немає такого заняття');
+        $activity->users()->attach(auth()->id());
+
+        return back()->with('success', 'Успишно приєднано!');
     }
 
     public function cancelJoin($id)
     {
         $activity = Activity::query()->where('id', $id)->first();
 
-        if($activity) {
-            $activity->users()->detach(auth()->id());
-            return back()->with('success', 'Успишно приєднано!');
+        if(!$activity) {
+            return back()->with('error', 'Немає такого заняття');
         }
 
-        return back()->with('error', 'Немає такого заняття');
+        $activity->users()->detach(auth()->id());
+        return back()->with('success', 'Успишно приєднано!');
     }
 }

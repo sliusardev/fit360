@@ -20,6 +20,10 @@ class TrainerController extends Controller
             ->with('user', 'activities')
             ->first();
 
+        if (!$trainer) {
+            return redirect('/');
+        }
+
         return view('site.trainer.show', ['trainer' => $trainer]);
     }
 }

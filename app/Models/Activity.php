@@ -80,8 +80,7 @@ class Activity extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('is_enabled', true)
-            ->where('created_at', '<=',Carbon::now());
+        $query->where('is_enabled', true);
     }
 
 }
