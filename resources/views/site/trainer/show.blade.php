@@ -10,5 +10,10 @@
             <h3>Спеціалізація:</h3>
             {!! $trainer->specialization !!}
         </div>
+
+        <div>
+            <h3>Інформація:</h3>
+            {!! $trainer->description !!}
+        </div>
     </div>
 @endsection
