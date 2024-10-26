@@ -34,11 +34,11 @@ class TrainerResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationGroup = 'Team';
+    protected static ?string $navigationGroup = 'Manage';
 
     public static function getNavigationGroup(): string
     {
-        return trans('dashboard.team');
+        return trans('dashboard.manage');
     }
 
     public static function getNavigationLabel(): string
@@ -110,9 +110,9 @@ class TrainerResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
-                    Tables\Actions\ViewAction::make(),
                 ]),
             ])
             ->bulkActions([

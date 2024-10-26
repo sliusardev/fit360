@@ -2,24 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ActivityResource\Pages;
-use App\Filament\Resources\ActivityResource\RelationManagers;
-use App\Models\Activity;
-use App\Services\UserService;
+use App\Filament\Resources\PriceListResource\Pages;
+use App\Filament\Resources\PriceListResource\RelationManagers;
+use App\Models\PriceList;
 use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
@@ -27,13 +22,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ActivityResource extends Resource
+class PriceListResource extends Resource
 {
-    protected static ?string $model = Activity::class;
+    protected static ?string $model = PriceList::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationGroup = 'Manage';
 
@@ -44,17 +39,17 @@ class ActivityResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return trans('dashboard.activities');
+        return trans('dashboard.price_lists');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return trans('dashboard.activities');
+        return trans('dashboard.price_lists');
     }
 
     public static function getModelLabel(): string
     {
-        return trans('dashboard.activity');
+        return trans('dashboard.price_list');
     }
 
     public static function form(Form $form): Form
@@ -67,38 +62,13 @@ class ActivityResource extends Resource
                             ->label(trans('dashboard.name'))
                             ->required(),
 
-                        Select::make('trainers')
-                            ->label(trans('dashboard.trainers'))
-                            ->multiple()
-                            ->searchable()
-                            ->preload()
-                            ->relationship('trainers', 'name'),
-
                         RichEditor::make('description')
                             ->label(trans('dashboard.description')),
 
-                        DateTimePicker::make('start_time')
-                            ->label(trans('dashboard.start_time'))
-                            ->minDate(now()->toDateString())
-                            ->seconds(false),
-
-                        TextInput::make('duration_minutes')
-                            ->label(trans('dashboard.duration_minutes'))
-                            ->numeric()
-                            ->postfix('Хвилин'),
-
-                        TextInput::make('available_slots')
-                            ->label(trans('dashboard.available_slots'))
-                            ->numeric(),
-
-                        TextInput::make('price')
-                            ->label(trans('dashboard.price'))
-                            ->numeric()
-                            ->prefix('UAH'),
 
                         FileUpload::make('image')
                             ->label(trans('dashboard.image'))
-                            ->directory('activities')
+                            ->directory('prices')
                             ->image()
                             ->imageEditor()
                             ->columnSpanFull(),
@@ -128,45 +98,20 @@ class ActivityResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('trainers.name')
-                    ->label(trans('dashboard.trainers'))
-                    ->listWithLineBreaks()
-                    ->bulleted(),
-
-                TextColumn::make('start_time')
-                    ->sortable()
+                TextColumn::make('created_at')
+                    ->label(trans('dashboard.created'))
                     ->dateTime('d.m.Y H:i')
-                    ->label(trans('dashboard.start_time')),
-
-                TextColumn::make('available_slots')
-                    ->sortable()
-                    ->label(trans('dashboard.available_slots')),
-
-                TextColumn::make('price')
-                    ->sortable()
-                    ->money('UAH')
-                    ->label(trans('dashboard.price')),
+                    ->sortable(),
             ])
             ->filters([
                 Filter::make('only_enabled')
                     ->label(trans('dashboard.only_enabled'))
                     ->query(fn (Builder $query): Builder => $query->active())
                     ->toggle(),
-
-                Filter::make('finished')
-                    ->label(trans('dashboard.finished'))
-                    ->query(fn (Builder $query): Builder => $query->old())
-                    ->toggle(),
-
-                Filter::make('not_started')
-                    ->label(trans('dashboard.not_started'))
-                    ->query(fn (Builder $query): Builder => $query->notStarted())
-                    ->toggle(),
             ])
             ->actions([
                 ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
-                    Tables\Actions\ReplicateAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ]),
@@ -175,22 +120,22 @@ class ActivityResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])->defaultSort('start_time', 'desc');
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
     {
         return [
-            RelationManagers\UsersRelationManager::class
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListActivities::route('/'),
-            'create' => Pages\CreateActivity::route('/create'),
-            'edit' => Pages\EditActivity::route('/{record}/edit'),
+            'index' => Pages\ListPriceLists::route('/'),
+            'create' => Pages\CreatePriceList::route('/create'),
+            'edit' => Pages\EditPriceList::route('/{record}/edit'),
         ];
     }
 }

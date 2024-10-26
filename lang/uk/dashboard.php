@@ -110,6 +110,9 @@ return array (
   'post_type' => 'Тип допису',
   'posts' => 'Дописи',
   'price' => 'Ціна',
+  'prices' => 'Ціни',
+  'price_list' => 'Прайс',
+  'price_lists' => 'Прайси',
   'project' => 'Проект',
   'projects' => 'Проекти',
   'reinstall_demo' => 'Перевстановити Демо Дані',
@@ -178,4 +181,5 @@ return array (
     'join' => 'Приєднатися',
     'finished' => 'Завершені',
     'not_started' => 'Ще не почалися',
+    'manage' => 'Керувати',
 );
