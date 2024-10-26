@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Middleware\ClientMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,11 @@ Route::prefix('activity')->group(function () {
 Route::prefix('trainer')->group(function () {
     Route::get('/', [TrainerController::class, 'index'])->name('trainer.index');
     Route::get('/{id}', [TrainerController::class, 'show'])->name('trainer.show');
+});
+
+Route::prefix('price-list')->group(function () {
+    Route::get('/', [PriceListController::class, 'index'])->name('price-list.index');
+    Route::get('/{id}', [PriceListController::class, 'show'])->name('price-list.show');
 });
 
 

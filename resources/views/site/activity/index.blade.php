@@ -48,6 +48,16 @@
                 </a>
             </div>
 
+            <div class="col-12 col-md-6 my-3 text-decoration-none">
+                <a href="{{route('price-list.index')}}" class="link">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Прайси Студії</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </div>
 
