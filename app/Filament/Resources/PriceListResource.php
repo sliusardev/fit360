@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PriceListResource\Pages;
 use App\Filament\Resources\PriceListResource\RelationManagers;
 use App\Models\PriceList;
+use Carbon\Carbon;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -72,6 +75,10 @@ class PriceListResource extends Resource
                             ->image()
                             ->imageEditor()
                             ->columnSpanFull(),
+
+                        DateTimePicker::make('created_at')
+                            ->label(trans('dashboard.created'))
+                            ->default(Carbon::now()),
 
                         Toggle::make('is_enabled')
                             ->label(trans('dashboard.enabled'))
