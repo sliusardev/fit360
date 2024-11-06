@@ -7,7 +7,7 @@
 
             <div class="mx-auto my-3 text-center col-12 col-md-4" style="">
 
-                <img src="{{$trainer->getImageUrl()}}" class="rounded img-fluid" alt="{{$trainer->name}}" style="width: 100%">
+                <img src="{{$trainer->getImageUrl()}}" loading="lazy" class="rounded img-fluid" alt="{{$trainer->name}}" style="width: 100%">
 
                 <div class="card-body">
                     <h5 class="card-title my-3">{{$trainer->name}}</h5>

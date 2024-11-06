@@ -26,7 +26,7 @@
                         <div class="my-2 p-2" >
 
                             @if($trainer->avatar)
-                                <img src="/storage/{{$trainer->avatar}}" class="" alt="{{$trainer->name}}" style="width: 50px; border-radius:5px; overflow: hidden">
+                                <img src="/storage/{{$trainer->avatar}}" loading="lazy" class="" alt="{{$trainer->name}}" style="width: 50px; border-radius:5px; overflow: hidden">
                             @endif
 
                             <div class="mx-3">{{$trainer->name}}</div>
