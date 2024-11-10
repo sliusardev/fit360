@@ -127,7 +127,7 @@ class Settings extends Page implements HasForms
         Artisan::call('optimize:clear');
 
         Notification::make()
-            ->title('Saved successfully')
+            ->title(trans('dashboard.success'))
             ->icon('heroicon-o-sparkles')
             ->iconColor('success')
             ->send();
