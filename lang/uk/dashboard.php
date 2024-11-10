@@ -182,4 +182,12 @@ return array (
     'finished' => 'Завершені',
     'not_started' => 'Ще не почалися',
     'manage' => 'Керувати',
+    'global_settings' => 'Глобальні Налаштування',
+    'site_name' => 'Назва Сайту',
+    'run_migrations' => 'Запустити міграції',
+    'success' => 'Успішно',
+    'slogan' => 'Слоган',
+    'about_us' => 'Про нас',
+    'contacts' => 'Контакти',
+    'google_map_code' => 'Код Google мапи',
 );
