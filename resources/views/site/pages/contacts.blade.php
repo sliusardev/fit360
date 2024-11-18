@@ -3,6 +3,9 @@
 @section('content')
 
     <div class="text-center my-4">
+
+        {{test2()}}
+
         <div>
             {!! $settings['contacts'] ?? '' !!}
         </div>
