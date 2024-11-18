@@ -10,14 +10,15 @@ class SettingService
     public static function connect()
     {
         try {
+
             $settings = Setting::query()->first();
+
+            if (!$settings) {
+                $settings = static::createNew();
+            }
+
         } catch (\Throwable $th) {
             return null;
-        }
-
-
-        if ($settings == null) {
-            $settings = static::createNew();
         }
 
         return $settings;

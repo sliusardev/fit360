@@ -58,6 +58,16 @@
                 </a>
             </div>
 
+            <div class="col-12 col-md-6 my-3 text-decoration-none">
+                <a href="{{route('page.contacts')}}" class="link">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Контакти</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Middleware\ClientMiddleware;
@@ -10,6 +11,8 @@ Route::get('/', function () {
 //    return view('welcome');
     return redirect()->route('activity');
 })->name('welcome');
+
+Route::get('contacts', [PageController::class, 'contacts'])->name('page.contacts');
 
 Route::prefix('activity')->group(function () {
    Route::get('/', [ActivityController::class, 'index'])
