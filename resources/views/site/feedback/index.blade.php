@@ -27,7 +27,7 @@
         @foreach($feedbacks as $feedback)
             <div class="card my-3">
                 <div class="card-body">
-                    <h5 class="card-title">{{$feedback->user->full_name ?? ''}}</h5>
+                    <h5 class="card-title">{{$feedback->user->full_name ?? 'Клієнт'}}</h5>
                     <p class="card-text">{{$feedback->text}}</p>
                 </div>
             </div>
