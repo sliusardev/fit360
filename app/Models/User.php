@@ -29,6 +29,7 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'last_name',
         'middle_name',
+        'full_name',
         'gender',
         'phone',
         'avatar',
@@ -58,6 +59,7 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'birth_day' => 'date',
             'password' => 'hashed',
+            'full_name' => 'string',
         ];
     }
 
@@ -96,10 +98,10 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasRole(RoleEnum::TRAINER->value);
     }
 
-    public function getFullNameAttribute(): string
-    {
-        return $this->name.' '.$this->last_name;
-    }
+//    public function getFullNameAttribute(): string
+//    {
+//        return $this->name.' '.$this->last_name;
+//    }
 
     public function hasActivity($id): bool
     {

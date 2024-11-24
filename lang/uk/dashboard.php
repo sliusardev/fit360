@@ -190,4 +190,7 @@ return array (
     'about_us' => 'Про нас',
     'contacts' => 'Контакти',
     'google_map_code' => 'Код Google мапи',
+    'client' => 'Клієнт',
+    'feed_back' => 'Відгук',
+    'feed_backs' => 'Відгуки',
 );
