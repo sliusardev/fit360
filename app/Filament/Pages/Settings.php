@@ -154,7 +154,7 @@ class Settings extends Page implements HasForms
                 Action::make('Run Migrations')
                     ->label(trans('dashboard.run_migrations'))
                     ->action(function () {
-                        Artisan::call('migrate');
+                        Artisan::call('migrate --force');
 
                         Notification::make()
                             ->title(trans('dashboard.success'))
