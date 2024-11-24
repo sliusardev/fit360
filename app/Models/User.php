@@ -78,6 +78,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(Activity::class, 'activity_user');
     }
 
+    public function feedBacks(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->hasRole(RoleEnum::ADMIN->value);

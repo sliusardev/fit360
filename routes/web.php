@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\TrainerController;
@@ -47,6 +48,11 @@ Route::prefix('trainer')->group(function () {
 Route::prefix('price-list')->group(function () {
     Route::get('/', [PriceListController::class, 'index'])->name('price-list.index');
     Route::get('/{id}', [PriceListController::class, 'show'])->name('price-list.show');
+});
+
+Route::prefix('feedback')->group(function () {
+    Route::get('/', [FeedBackController::class, 'index'])->name('feedback.index');
+    Route::post('/store', [FeedBackController::class, 'store'])->name('feedback.store');
 });
 
 
