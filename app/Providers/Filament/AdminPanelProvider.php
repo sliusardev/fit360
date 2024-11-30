@@ -58,7 +58,15 @@ class AdminPanelProvider extends PanelProvider
                     ->label(trans('dashboard.see_on_site'))
                     ->icon('heroicon-o-eye')
                     ->url(fn (): string => '/')
-                    ->openUrlInNewTab()
+                    ->openUrlInNewTab(),
+
+                NavigationItem::make('image_optimization')
+                    ->group(trans('dashboard.system'))
+                    ->sort(2)
+                    ->label(trans('dashboard.image_optimization'))
+                    ->icon('heroicon-m-rocket-launch')
+                    ->url(fn (): string => 'https://squoosh.app/')
+                    ->openUrlInNewTab(),
             ])
             ->authMiddleware([
                 Authenticate::class,

@@ -193,4 +193,8 @@ return array (
     'client' => 'Клієнт',
     'feed_back' => 'Відгук',
     'feed_backs' => 'Відгуки',
+    'before' => 'До',
+    'after' => 'Після',
+    'before_after' => 'До та Після',
+    'image_optimization' => 'Оптимізація зображень',
 );
