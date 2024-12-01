@@ -15,4 +15,18 @@ class UserService
             ->pluck('full_name', 'id')
             ->toArray();
     }
+
+    public static function getClientCount(): int
+    {
+        return User::query()
+            ->role(RoleEnum::CLIENT->value)
+            ->count();
+    }
+
+    public static function getTrainerCount(): int
+    {
+        return User::query()
+            ->role(RoleEnum::TRAINER->value)
+            ->count();
+    }
 }

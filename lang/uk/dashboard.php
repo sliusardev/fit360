@@ -197,4 +197,5 @@ return array (
     'after' => 'Після',
     'before_after' => 'До та Після',
     'image_optimization' => 'Оптимізація зображень',
+    'clients' => 'Клієнти',
 );

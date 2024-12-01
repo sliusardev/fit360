@@ -103,11 +103,6 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasRole(RoleEnum::TRAINER->value);
     }
 
-//    public function getFullNameAttribute(): string
-//    {
-//        return $this->name.' '.$this->last_name;
-//    }
-
     public function hasActivity($id): bool
     {
         $activityIds = $this->activities->pluck('id')->toArray();
