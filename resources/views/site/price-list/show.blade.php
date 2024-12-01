@@ -1,4 +1,8 @@
-@extends('site.layout.site')
+@extends('site.layout.site', [
+    'title' => $priceList->title ?? '',
+    'seoDescription' => '',
+    'seoKeyWords' => '',
+    ])
 
 @section('content')
     <a href="{{route('price-list.index')}}">

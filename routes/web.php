@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BeforeAfterController;
 use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PriceListController;
@@ -53,6 +54,11 @@ Route::prefix('price-list')->group(function () {
 Route::prefix('feedback')->group(function () {
     Route::get('/', [FeedBackController::class, 'index'])->name('feedback.index');
     Route::post('/store', [FeedBackController::class, 'store'])->name('feedback.store');
+});
+
+Route::prefix('before-after')->group(function () {
+    Route::get('/', [BeforeAfterController::class, 'index'])->name('before-after.index');
+    Route::get('/{id}', [BeforeAfterController::class, 'show'])->name('before-after.show');
 });
 
 

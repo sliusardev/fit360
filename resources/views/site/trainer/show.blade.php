@@ -1,4 +1,8 @@
-@extends('site.layout.site')
+@extends('site.layout.site', [
+    'title' => $trainer->name,
+    'seoDescription' => '',
+    'seoKeyWords' => '',
+    ])
 
 @section('content')
     <div class="card-body">

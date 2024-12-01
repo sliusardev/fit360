@@ -65,7 +65,7 @@ class AdminPanelProvider extends PanelProvider
                     ->sort(2)
                     ->label(trans('dashboard.image_optimization'))
                     ->icon('heroicon-m-rocket-launch')
-                    ->url(fn (): string => 'https://squoosh.app/')
+                    ->url(fn (): string => 'https://www.iloveimg.com/uk')
                     ->openUrlInNewTab(),
             ])
             ->authMiddleware([

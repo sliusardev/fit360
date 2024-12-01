@@ -60,29 +60,35 @@ class BeforeAfterResource extends Resource
                     ->schema([
                         TextInput::make('title')
                             ->label(trans('dashboard.name'))
-                            ->required(),
+                            ->required()
+                            ->columnSpanFull(),
 
                         RichEditor::make('description')
-                            ->label(trans('dashboard.description')),
+                            ->label(trans('dashboard.description'))
+                            ->columnSpanFull(),
 
                         FileUpload::make('image_before')
                             ->label(trans('dashboard.before'))
                             ->directory('before-after')
                             ->image()
                             ->imageEditor()
-                            ->columnSpanFull(),
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('600')
+                            ->required(),
 
                         FileUpload::make('image_after')
                             ->label(trans('dashboard.after'))
                             ->directory('before-after')
                             ->image()
                             ->imageEditor()
-                            ->columnSpanFull(),
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('600')
+                            ->required(),
 
                         Toggle::make('is_enabled')
                             ->label(trans('dashboard.enabled'))
                             ->default(true),
-                    ]),
+                    ])->columns(2),
             ]);
     }
 
@@ -119,7 +125,7 @@ class BeforeAfterResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

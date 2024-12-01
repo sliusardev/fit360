@@ -1,4 +1,8 @@
-@extends('site.layout.site')
+@extends('site.layout.site', [
+    'title' => 'Мої завершені зайняття',
+    'seoDescription' => '',
+    'seoKeyWords' => '',
+    ])
 
 @section('content')
 

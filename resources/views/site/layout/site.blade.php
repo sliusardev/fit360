@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{env('APP_NAME')}} фітнеc студія в Полаві</title>
+    <meta name="description" content="{{$seoDescription ?? $settings['seo_description'] ?? ''}}">
+    <meta name="keywords" content="{{$seoKeyWords ?? $settings['seo_text_keys'] ?? ''}}">
+    <title>{{$settings['site_name'] ?? ''}} - {{$title ?? $settings['seo_title'] ?? ''}}</title>
 
     <meta name="description" content="Fit360 фітнес студія у Полтаві">
     <meta name="keywords" content="fit360, fitnes, poltava, полтаваб фітнес, спорт, тренування">
@@ -16,6 +18,8 @@
     <meta property="og:url" content="{{env('APP_URL')}}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @stack('custom-header')
 </head>
 <body>
 
@@ -55,7 +59,7 @@
 
     @yield('content')
 </div>
-
+@stack('custom-footer')
 </body>
 </html>
 

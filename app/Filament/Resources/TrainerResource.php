@@ -85,7 +85,8 @@ class TrainerResource extends Resource
                             ->directory('users')
                             ->image()
                             ->imageEditor()
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->maxSize(250),
 
                     ])->columns(1)
             ]);

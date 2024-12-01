@@ -1,4 +1,8 @@
-@extends('site.layout.site')
+@extends('site.layout.site', [
+    'title' => 'Фітнес студія в Полтаві',
+    'seoDescription' => '',
+    'seoKeyWords' => '',
+    ])
 
 @section('content')
 
@@ -53,6 +57,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h4>Прайси Студії</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-md-6 my-3 text-decoration-none">
+                <a href="{{route('before-after.index')}}" class="link">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>До та Після</h4>
                         </div>
                     </div>
                 </a>
