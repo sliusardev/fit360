@@ -59,7 +59,7 @@ class BeforeAfterResource extends Resource
                 Section::make()
                     ->schema([
                         TextInput::make('title')
-                            ->label(trans('dashboard.name'))
+                            ->label(trans('dashboard.title'))
                             ->required()
                             ->columnSpanFull(),
 
