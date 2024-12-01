@@ -67,14 +67,22 @@ class BeforeAfterResource extends Resource
                             ->label(trans('dashboard.description'))
                             ->columnSpanFull(),
 
+                        FileUpload::make('image_collage')
+                            ->label(trans('dashboard.collage'))
+                            ->directory('before-after')
+                            ->image()
+                            ->imageEditor()
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('600')
+                            ->columnSpanFull(),
+
                         FileUpload::make('image_before')
                             ->label(trans('dashboard.before'))
                             ->directory('before-after')
                             ->image()
                             ->imageEditor()
                             ->imageResizeMode('cover')
-                            ->imageResizeTargetWidth('600')
-                            ->required(),
+                            ->imageResizeTargetWidth('600'),
 
                         FileUpload::make('image_after')
                             ->label(trans('dashboard.after'))
@@ -82,8 +90,7 @@ class BeforeAfterResource extends Resource
                             ->image()
                             ->imageEditor()
                             ->imageResizeMode('cover')
-                            ->imageResizeTargetWidth('600')
-                            ->required(),
+                            ->imageResizeTargetWidth('600'),
 
                         Toggle::make('is_enabled')
                             ->label(trans('dashboard.enabled'))

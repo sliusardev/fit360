@@ -198,4 +198,5 @@ return array (
     'before_after' => 'До та Після',
     'image_optimization' => 'Оптимізація зображень',
     'clients' => 'Клієнти',
+    'collage' => 'Колаж',
 );

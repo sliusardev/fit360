@@ -12,6 +12,7 @@ class BeforeAfter extends Model
         'description',
         'image_before',
         'image_after',
+        'image_collage',
         'is_enabled',
     ];
 
@@ -35,5 +36,10 @@ class BeforeAfter extends Model
     public function getAfterImageUrl(): string
     {
         return !empty($this->image_after) ? '/storage/'.$this->image_after : '';
+    }
+
+    public function getCollageImageUrl(): string
+    {
+        return !empty($this->image_collage) ? '/storage/'.$this->image_collage : '';
     }
 }
