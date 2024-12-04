@@ -49,7 +49,7 @@
         </li>
         <li class="nav-item dropup">
             <a class="nav-link" href="#" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-heart"></i>
+                <i class="bi bi-calendar-check"></i>
                 <span>Тренування</span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="activityDropdown">
