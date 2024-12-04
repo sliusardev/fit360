@@ -29,7 +29,8 @@
     <div class="text-center my-4">
         <div>
             <a href="/">
-                <img src="{{asset('assets/images/header/fit360_logo.jpg')}}" alt="fit360" class="img-fluid" width="336" height="201">
+                <img src="{{asset('assets/images/header/fit360_logo.jpg')}}" alt="fit360" class="img-fluid" width="336"
+                     height="201">
             </a>
 
             <div>
@@ -58,6 +59,8 @@
     @endif
 
     @yield('content')
+
+    @include('site.inc.bottom-mobile-menu')
 </div>
 @stack('custom-footer')
 </body>
