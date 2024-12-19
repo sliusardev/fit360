@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{$seoDescription ?? $settings['seo_description'] ?? ''}}">
     <meta name="keywords" content="{{$seoKeyWords ?? $settings['seo_text_keys'] ?? ''}}">
-    <title>{{$settings['site_name'] ?? ''}} - {{$title ?? $settings['seo_title'] ?? ''}}</title>
+    <title>
+        {{$settings['site_name'] ?? ''}} - {{!empty($title) ? $title . ' - ' . $settings['seo_title'] ?? '' : $settings['seo_title'] ?? '' }}
+    </title>
 
-    <meta name="description" content="Fit360 фітнес студія у Полтаві">
-    <meta name="keywords" content="fit360, fitnes, Poltava, Полтава, фітнес, спорт, тренування">
     <meta name="author" content="Олександр Пузій">
     <meta name="image" content="{{asset('assets/images/header/fit360_logo.jpg')}}">
     <meta property="og:type" content="website">

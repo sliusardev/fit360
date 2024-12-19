@@ -1,7 +1,5 @@
 @extends('site.layout.site', [
-    'title' => 'Тренери',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
+    'title' => 'Фітнес Тренери',
     ])
 
 @section('content')

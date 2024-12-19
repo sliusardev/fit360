@@ -1,7 +1,5 @@
 @extends('site.layout.site', [
     'title' => $priceList->title ?? '',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
     ])
 
 @section('content')

@@ -1,7 +1,6 @@
 @extends('site.layout.site', [
     'title' => $activity->title ?? '',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
+    'seoDescription' => 'Фітнес Заняття у Полтаві з тренером',
     ])
 
 @section('content')

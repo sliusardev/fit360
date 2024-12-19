@@ -1,7 +1,5 @@
 @extends('site.layout.site', [
-    'title' => 'до та після',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
+    'title' => 'До та після',
     ])
 
 @section('content')

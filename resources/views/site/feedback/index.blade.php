@@ -1,7 +1,5 @@
 @extends('site.layout.site', [
     'title' => 'Відгуки клієнтів',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
     ])
 
 @section('content')

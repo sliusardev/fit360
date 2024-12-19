@@ -1,7 +1,5 @@
 @extends('site.layout.site', [
     'title' => $trainer->name,
-    'seoDescription' => '',
-    'seoKeyWords' => '',
     ])
 
 @section('content')

@@ -1,8 +1,4 @@
-@extends('site.layout.site', [
-    'title' => 'Фітнес студія в Полтаві',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
-    ])
+@extends('site.layout.site')
 
 @section('content')
 

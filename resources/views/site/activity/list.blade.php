@@ -1,7 +1,7 @@
 @extends('site.layout.site', [
     'title' => 'Групові зайняття',
-    'seoDescription' => '',
-    'seoKeyWords' => '',
+    'seoDescription' => 'Групові заняття у Полтаві',
+    'seoKeyWords' => 'фітнес, Полтава, групові заняття',
     ])
 
 @section('content')
