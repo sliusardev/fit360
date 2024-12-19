@@ -121,7 +121,7 @@ return array (
   'request_limit' => 'Ліміт Запитів',
   'role' => 'Роль',
   'roles' => 'Ролі',
-  'see_on_site' => 'Переглянути на сайті',
+  'see_on_site' => 'На сайт',
   'send_notify' => 'Відправляти повідомлення',
   'sent' => 'Sent',
   'seo_description' => 'SEO Опис',
