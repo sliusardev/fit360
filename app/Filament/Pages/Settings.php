@@ -5,10 +5,12 @@ namespace App\Filament\Pages;
 use App\Models\Setting;
 use App\Services\CustomFieldService;
 use App\Services\SettingService;
+use App\Services\ThemeService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
@@ -93,6 +95,14 @@ class Settings extends Page implements HasForms
                                     ->image()
                                     ->imageEditor()
                                     ->columnSpanFull(),
+
+                                Select::make('theme')
+                                    ->label(trans('dashboard.theme'))
+                                    ->options(
+                                        resolve(ThemeService::class)->getAllTemplatesNames()
+                                    )
+                                    ->default('default')
+                                    ->required(),
                             ]),
 
                         Tab::make('Contacts')

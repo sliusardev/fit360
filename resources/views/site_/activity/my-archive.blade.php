@@ -1,6 +1,6 @@
-@extends('site.layout.site', [
-    'title' => 'Мої Заняття'
-])
+@extends('themes.default.layout.site', [
+    'title' => 'Мої завершені заняття',
+    ])
 
 @section('content')
 

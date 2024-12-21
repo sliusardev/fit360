@@ -1,5 +1,7 @@
-@extends('site.layout.site', [
-    'title' => 'Мої завершені заняття',
+@extends('themes.default.layout.site', [
+    'title' => 'Групові зайняття',
+    'seoDescription' => 'Групові заняття у Полтаві',
+    'seoKeyWords' => 'фітнес, Полтава, групові заняття',
     ])
 
 @section('content')
@@ -22,11 +24,11 @@
                             <div class="row text-center">
                                 <div class="col-6">
                                     Всього місць
-                                    <p>{{$activity->available_slots}}</p>
+                                <p>{{$activity->available_slots}}</p>
                                 </div>
                                 <div class="col-6">
                                     Залишилось місць
-                                    <p>{{$activity->getFreeSlots()}}</p>
+                                <p>{{$activity->getFreeSlots()}}</p>
                                 </div>
                             </div>
 

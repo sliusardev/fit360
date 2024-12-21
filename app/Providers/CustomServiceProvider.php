@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Services\CustomFieldService;
 use App\Services\SettingService;
+use App\Services\ThemeService;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,8 +25,6 @@ class CustomServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrapFive();
-
         CustomFieldService::setCustomFields('seo_fields', [
             TextInput::make('seo_title')
                 ->columnSpan('full'),
@@ -40,6 +38,8 @@ class CustomServiceProvider extends ServiceProvider
 
         try {
             View::share('settings', SettingService::values());
+            ThemeService::getThemeFunctions(SettingService::value('theme'));
+            View::share('themeSettings', themeSettings());
         } catch (\Throwable $th) {
 
         }

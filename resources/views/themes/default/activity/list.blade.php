@@ -1,4 +1,4 @@
-@extends('site.layout.site', [
+@extends('themes.default.layout.site', [
     'title' => 'Групові зайняття',
     'seoDescription' => 'Групові заняття у Полтаві',
     'seoKeyWords' => 'фітнес, Полтава, групові заняття',

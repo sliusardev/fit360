@@ -21,7 +21,7 @@ class FeedBackController extends Controller
             $hasFeedBack = auth()->user()->feedBacks()->count();
         }
 
-        return view('site.feedback.index', compact('feedbacks', 'hasFeedBack'));
+        return themeView('feedback.index', compact('feedbacks', 'hasFeedBack'));
     }
 
     public function store(FeedBackRequest $request)

@@ -9,6 +9,6 @@ class PageController extends Controller
 {
     public function contacts()
     {
-        return view('site.pages.contacts');
+        return themeView('pages.contacts');
     }
 }

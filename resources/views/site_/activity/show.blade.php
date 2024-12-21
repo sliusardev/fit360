@@ -1,4 +1,4 @@
-@extends('site.layout.site', [
+@extends('themes.default.layout.site', [
     'title' => $activity->title ?? '',
     'seoDescription' => 'Фітнес Заняття у Полтаві з тренером',
     ])

@@ -10,7 +10,7 @@ class TrainerController extends Controller
     public function index()
     {
         $trainers = Trainer::all();
-        return view('site.trainer.index', compact('trainers'));
+        return themeView('trainer.index', compact('trainers'));
     }
 
     public function show($id)
@@ -24,6 +24,6 @@ class TrainerController extends Controller
             return redirect('/');
         }
 
-        return view('site.trainer.show', ['trainer' => $trainer]);
+        return themeView('trainer.show', ['trainer' => $trainer]);
     }
 }

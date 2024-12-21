@@ -9,7 +9,7 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        return view('site.activity.index');
+        return themeView('activity.index');
     }
 
     public function list()
@@ -21,21 +21,21 @@ class ActivityController extends Controller
             ->orderBy('start_time', 'asc')
             ->get();
 
-        return view('site.activity.list', compact('activities'));
+        return themeView('activity.list', compact('activities'));
     }
 
     public function my()
     {
         $activities = auth()->user()->activities()->notStarted()->active()->get();
 
-        return view('site.activity.my', compact('activities'));
+        return themeView('activity.my', compact('activities'));
     }
 
     public function myArchive()
     {
         $activities = auth()->user()->activities()->old()->active()->get();
 
-        return view('site.activity.my-archive', compact('activities'));
+        return themeView('activity.my-archive', compact('activities'));
     }
 
     public function show($id)
@@ -49,7 +49,7 @@ class ActivityController extends Controller
             return redirect('/');
         }
 
-        return view('site.activity.show', compact('activity'));
+        return themeView('activity.show', compact('activity'));
     }
 
     public function join($id)

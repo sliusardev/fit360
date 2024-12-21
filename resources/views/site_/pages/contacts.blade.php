@@ -1,4 +1,4 @@
-@extends('site.layout.site', [
+@extends('themes.default.layout.site', [
     'title' => 'Контакти',
     'seoDescription' => 'Контакти фітнес центру у Полтаві',
     ])
