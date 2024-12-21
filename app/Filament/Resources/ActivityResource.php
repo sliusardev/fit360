@@ -101,6 +101,8 @@ class ActivityResource extends Resource
                             ->directory('activities')
                             ->image()
                             ->imageEditor()
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('600')
                             ->columnSpanFull(),
 
                         Toggle::make('is_enabled')

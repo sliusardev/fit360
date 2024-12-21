@@ -83,10 +83,11 @@ class TrainerResource extends Resource
                         FileUpload::make('avatar')
                             ->label(trans('dashboard.avatar'))
                             ->directory('users')
+                            ->columnSpanFull()
                             ->image()
                             ->imageEditor()
-                            ->columnSpanFull()
-                            ->maxSize(250),
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('600'),
 
                     ])->columns(1)
             ]);
