@@ -74,6 +74,6 @@ class ActivityController extends Controller
         }
 
         $activity->users()->detach(auth()->id());
-        return back()->with('success', 'Успишно приєднано!');
+        return back()->with('success', 'Успишно скасовано!');
     }
 }
