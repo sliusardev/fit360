@@ -8,7 +8,7 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BmSgxXsK.css",
+    "file": "assets/app-Czt5Ev1S.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -16,6 +16,17 @@
     "file": "assets/app-DyjoVA0U.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/views/themes/simple-gray/assets/simple-gray.css": {
+    "file": "assets/simple-gray-C0Mv4RWa.css",
+    "src": "resources/views/themes/simple-gray/assets/simple-gray.css",
+    "isEntry": true
+  },
+  "resources/views/themes/simple-gray/assets/simple-gray.js": {
+    "file": "assets/simple-gray-l0sNRNKZ.js",
+    "name": "simple-gray",
+    "src": "resources/views/themes/simple-gray/assets/simple-gray.js",
     "isEntry": true
   }
 }

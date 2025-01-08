@@ -2,9 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @includeIf('includes.header.meta')
-    <script src="https://cdn.tailwindcss.com">
     </script>
+
+    @vite(['resources/views/themes/simple-gray/assets/simple-gray.css', 'resources/views/themes/simple-gray/assets/simple-gray.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
     <style>
         .sidebar {
             transition: transform 0.3s ease-in-out;
