@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
     @includeIf('includes.header.meta')
-    </script>
 
     @vite(['resources/views/themes/simple-gray/assets/simple-gray.css', 'resources/views/themes/simple-gray/assets/simple-gray.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>

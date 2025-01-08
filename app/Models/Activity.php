@@ -94,7 +94,7 @@ class Activity extends Model
     }
     public function startTimeHuman()
     {
-        return $this->start_time->locale('uk')->isoFormat("D MMMM Y, dddd");
+        return $this->start_time->locale('uk')->isoFormat("D MMMM Y HH:mm, dddd");
     }
 
 }
