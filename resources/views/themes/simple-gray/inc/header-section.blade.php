@@ -2,7 +2,10 @@
     <h1 class="text-xl font-bold text-gray-700 italic">
         Fit360 - Фітнес Студія
     </h1>
-    <div class="flex space-x-2">
+    <div class="flex gap-4">
+        <a href="https://www.instagram.com/fit360_plt/" class="text-gray-500">
+            <i class="fab fa-instagram"></i>
+        </a>
         <button class="text-gray-500" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
