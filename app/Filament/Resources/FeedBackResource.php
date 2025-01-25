@@ -27,13 +27,13 @@ class FeedBackResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-m-chat-bubble-left-right';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationGroup = 'Manage';
+    protected static ?string $navigationGroup = 'Content';
 
     public static function getNavigationGroup(): string
     {
-        return trans('dashboard.manage');
+        return trans('dashboard.content');
     }
 
     public static function getNavigationLabel(): string

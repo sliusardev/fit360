@@ -28,13 +28,13 @@ class BeforeAfterResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 4;
 
-    protected static ?string $navigationGroup = 'Manage';
+    protected static ?string $navigationGroup = 'Content';
 
     public static function getNavigationGroup(): string
     {
-        return trans('dashboard.manage');
+        return trans('dashboard.content');
     }
 
     public static function getNavigationLabel(): string
