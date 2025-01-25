@@ -66,7 +66,7 @@ class Register extends BaseRegister
 
         $user = auth()->user();
 
-        $user->assignRole(RoleEnum::CLIENT);;
+        $user->assignRole(RoleEnum::CLIENT->value);
 
         return app(RegistrationResponse::class);
     }
