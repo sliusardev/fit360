@@ -200,4 +200,7 @@ return [
     'clients' => 'Клієнти',
     'collage' => 'Колаж',
     'theme' => 'Тема',
+    'activities_count' => 'Кількість тренувань',
+    'activities_old_count' => 'Завершені тренування',
+    'activities_not_started_count' => 'Майбутні тренування',
 ];

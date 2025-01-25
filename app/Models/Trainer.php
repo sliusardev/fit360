@@ -30,6 +30,16 @@ class Trainer extends Model
         return $this->belongsToMany(Activity::class, 'activity_trainer');
     }
 
+    public function activitiesOld(): BelongsToMany
+    {
+        return $this->belongsToMany(Activity::class, 'activity_trainer')->old();
+    }
+
+    public function activitiesNotStarted(): BelongsToMany
+    {
+        return $this->belongsToMany(Activity::class, 'activity_trainer')->notStarted();
+    }
+
     public function getImageUrl(): string
     {
         return !empty($this->avatar) ? '/storage/'.$this->avatar : '';

@@ -8,6 +8,7 @@ use App\Filament\Resources\TrainerResource\RelationManagers;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Services\UserService;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -35,6 +36,13 @@ class TrainerResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationGroup = 'Manage';
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        return $query->withCount('activitiesOld');
+    }
 
     public static function getNavigationGroup(): string
     {
@@ -104,6 +112,16 @@ class TrainerResource extends Resource
 
                 TextColumn::make('name')
                     ->label(trans('dashboard.name'))
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('activities_old_count')
+                    ->label(trans('dashboard.activities_old_count'))
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('activities_not_started_count')
+                    ->label(trans('dashboard.activities_not_started_count'))
                     ->searchable()
                     ->sortable(),
             ])
