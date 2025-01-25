@@ -41,7 +41,8 @@ class TrainerResource extends Resource
     {
         $query = parent::getEloquentQuery();
 
-        return $query->withCount('activitiesOld');
+        return $query->withCount('activitiesOld')
+            ->withCount('activitiesNotStarted');
     }
 
     public static function getNavigationGroup(): string
