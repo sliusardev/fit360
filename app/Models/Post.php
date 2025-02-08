@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -34,5 +35,20 @@ class Post extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('is_enabled', true);
+    }
+
+    public function thumbnailUrl(): string
+    {
+        return !empty($this->thumbnail) ? '/storage/'.$this->thumbnail : '';
+    }
+
+    public function dateTime()
+    {
+        return $this->created_at->locale('uk')->isoFormat("D MMMM Y HH:mm, dddd");
     }
 }

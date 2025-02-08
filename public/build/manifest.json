@@ -19,14 +19,17 @@
     "isEntry": true
   },
   "resources/views/themes/simple-gray/assets/simple-gray.css": {
-    "file": "assets/simple-gray-Cyqxppq_.css",
+    "file": "assets/simple-gray-XJ86iPDa.css",
     "src": "resources/views/themes/simple-gray/assets/simple-gray.css",
     "isEntry": true
   },
   "resources/views/themes/simple-gray/assets/simple-gray.js": {
-    "file": "assets/simple-gray-l0sNRNKZ.js",
+    "file": "assets/simple-gray-B_Ycobq2.js",
     "name": "simple-gray",
     "src": "resources/views/themes/simple-gray/assets/simple-gray.js",
-    "isEntry": true
+    "isEntry": true,
+    "css": [
+      "assets/simple-gray-D5cYTZrU.css"
+    ]
   }
 }

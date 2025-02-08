@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BeforeAfterController;
 use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PriceListController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Middleware\ClientMiddleware;
@@ -61,4 +62,7 @@ Route::prefix('before-after')->group(function () {
     Route::get('/{id}', [BeforeAfterController::class, 'show'])->name('before-after.show');
 });
 
-
+Route::prefix('posts')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
+});
