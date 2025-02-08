@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
     public function index()
     {
-        return themeView('activity.index');
+        $posts = Post::query()->active()->limit(3)->orderBy('id', 'desc')->get();
+        return themeView('activity.index', compact('posts'));
     }
 
     public function list()

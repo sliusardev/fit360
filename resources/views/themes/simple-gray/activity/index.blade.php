@@ -67,4 +67,27 @@
         @endauth
     </div>
 
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            @foreach($posts as $post)
+                <div class="swiper-slide">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden my-3">
+                        <a href="{{route('posts.show', $post->slug)}}">
+                            <img src="{{$post->thumbnailUrl()}}" alt="Blog Image" class="w-full h-48 object-cover">
+                        </a>
+                        <div class="p-4">
+                            <a href="{{route('posts.show', $post->slug)}}">
+                                <h2 class="text-xl font-semibold mb-2">{{$post->title}}</h2>
+                            </a>
+
+                            <p class="text-gray-600 mb-2">{!! $post->short !!}</p>
+                            <span class="text-gray-500 text-sm">{{$post->dateTime()}}</span>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
 @endsection

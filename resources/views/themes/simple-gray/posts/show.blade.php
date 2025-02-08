@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container mx-auto p-4">
+        <a href="{{route('posts.index')}}">
+            <i class="fas fa-chevron-left"></i>
+        </a>
         <div class="bg-white rounded-lg shadow-md">
             <img src="{{$post->thumbnailUrl()}}" alt="{{$post->title}}" class="w-full h-auto object-cover">
             <div class="p-4">

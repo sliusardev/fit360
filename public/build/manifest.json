@@ -24,12 +24,12 @@
     "isEntry": true
   },
   "resources/views/themes/simple-gray/assets/simple-gray.js": {
-    "file": "assets/simple-gray-B_Ycobq2.js",
+    "file": "assets/simple-gray-DTu3iIGp.js",
     "name": "simple-gray",
     "src": "resources/views/themes/simple-gray/assets/simple-gray.js",
     "isEntry": true,
     "css": [
-      "assets/simple-gray-D5cYTZrU.css"
+      "assets/simple-gray-BvAPKIop.css"
     ]
   }
 }

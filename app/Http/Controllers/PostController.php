@@ -19,6 +19,7 @@ class PostController extends Controller
             })
             ->with('tags')
             ->active()
+            ->orderBy('id', 'desc')
             ->paginate(10);
         return themeView('posts.index', compact('posts'));
     }
