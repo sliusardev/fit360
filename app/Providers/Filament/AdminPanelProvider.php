@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\BirthdayTodayWidget;
 use App\Filament\Widgets\ResourceCountsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -43,6 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 ResourceCountsWidget::class,
+                BirthdayTodayWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

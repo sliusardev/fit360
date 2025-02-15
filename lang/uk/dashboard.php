@@ -157,6 +157,9 @@ return [
     'user' => 'Користувач',
     'users' => 'Користувачі',
     'birth_day' => 'День народження',
+    'birth_days' => 'Дні народження',
+    'birth_days_today' => 'Дні народження сьогодні',
+    'no_birth_days_today' => 'Сьогодні немає днів народження',
     'gender' => 'Стать',
     'video_link' => 'Посилання на Відео',
     'view' => 'Вигляд',
@@ -203,4 +206,5 @@ return [
     'activities_count' => 'Кількість тренувань',
     'activities_old_count' => 'Завершені тренування',
     'activities_not_started_count' => 'Майбутні тренування',
+    'age' => 'Вік',
 ];
