@@ -39,7 +39,7 @@ class BirthdayTodayWidget extends BaseWidget
             ])
             ->actions([
                 Action::make('edit')
-                    ->label('Edit')
+                    ->label(__('dashboard.edit'))
                     ->url(fn ($record) => '/admin/users/' . $record->id . '/edit', true),
             ])
             ->defaultSort('name') // Sort by name by default

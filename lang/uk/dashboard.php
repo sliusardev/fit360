@@ -207,4 +207,5 @@ return [
     'activities_old_count' => 'Завершені тренування',
     'activities_not_started_count' => 'Майбутні тренування',
     'age' => 'Вік',
+    'edit' => 'Змінити',
 ];
