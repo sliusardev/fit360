@@ -28,8 +28,8 @@ class TelegraphService
             }
 
             // Run the artisan command to set the webhook
-            Artisan::call('telegraph:unset-webhook', ['bot' => 1]);
-            Artisan::call('telegraph:set-webhook', ['bot' => 1]);
+            Artisan::call('telegraph:unset-webhook', ['bot' => $bot->id]);
+            Artisan::call('telegraph:set-webhook', ['bot' => $bot->id]);
 
             Log::info('Webhook successfully set for the main bot.');
         } catch (\Exception $e) {
