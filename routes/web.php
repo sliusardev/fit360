@@ -6,6 +6,7 @@ use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\TelegramBotController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Middleware\ClientMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -66,3 +67,5 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
     Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
 });
+
+// Route::post('/telegram/webhook', [TelegramBotController::class, 'handleWebhook']);

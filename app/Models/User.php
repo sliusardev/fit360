@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\RoleEnum;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -116,5 +117,17 @@ class User extends Authenticatable implements FilamentUser
         }
 
         return true;
+    }
+
+    public function telegraphChats(): belongsToMany
+    {
+        return $this->belongsToMany(TelegraphChat::class, 'telegraph_chat_users');
+    }
+
+    public function sendMessageToTelegram($message): void
+    {
+        $chat = $this->telegraphChats->first();
+
+        $chat->message($message)->send();
     }
 }

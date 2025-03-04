@@ -208,4 +208,6 @@ return [
     'activities_not_started_count' => 'Майбутні тренування',
     'age' => 'Вік',
     'edit' => 'Змінити',
+    'create_bot' => 'Створити Бота',
+    'set_bot_webhook' => 'Запустити Вебхук Бота',
 ];

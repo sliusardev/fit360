@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Models\Setting;
 use App\Services\CustomFieldService;
 use App\Services\SettingService;
+use App\Services\TelegraphService;
 use App\Services\ThemeService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -165,6 +166,32 @@ class Settings extends Page implements HasForms
                     ->label(trans('dashboard.run_migrations'))
                     ->action(function () {
                         Artisan::call('migrate --force');
+
+                        Notification::make()
+                            ->title(trans('dashboard.success'))
+                            ->success()
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->color('success'),
+
+                Action::make('Create Bot')
+                    ->label(trans('dashboard.create_bot'))
+                    ->action(function () {
+                        TelegraphService::createMainBot();
+
+                        Notification::make()
+                            ->title(trans('dashboard.success'))
+                            ->success()
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->color('success'),
+
+                Action::make('Set Webhook Bot')
+                    ->label(trans('dashboard.set_bot_webhook'))
+                    ->action(function () {
+                        TelegraphService::setMainWebhook();
 
                         Notification::make()
                             ->title(trans('dashboard.success'))
