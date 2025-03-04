@@ -21,16 +21,16 @@ class TelegraphService
     {
         try {
             $bot = TelegraphBot::query()->where("token", env('TELEGRAM_BOT_TOKEN'))->first();
-    
+
             if (!$bot) {
                 Log::error('Telegraph bot not found with the provided token.');
                 return;
             }
-    
+
             // Run the artisan command to set the webhook
-            Artisan::call('telegraph:unset-webhook', ['bot' => 4]);
-            Artisan::call('telegraph:set-webhook', ['bot' => 4]);
-    
+            Artisan::call('telegraph:unset-webhook', ['bot' => 1]);
+            Artisan::call('telegraph:set-webhook', ['bot' => 1]);
+
             Log::info('Webhook successfully set for the main bot.');
         } catch (\Exception $e) {
             Log::error('Failed to set webhook for the main bot: ' . $e->getMessage());
