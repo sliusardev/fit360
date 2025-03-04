@@ -6,6 +6,9 @@
         <a href="https://www.instagram.com/fit360_plt/" class="text-gray-500">
             <i class="fab fa-instagram"></i>
         </a>
+        <a href="https://t.me/fit_360_com_ua_bot" class="text-gray-500">
+            <i class="fab fa-telegram"></i>
+        </a>
         <button class="text-gray-500" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
         </button>
