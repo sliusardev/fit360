@@ -128,8 +128,10 @@ class PostResource extends Resource
                                 FileUpload::make('thumbnail')
                                     ->label(trans('dashboard.thumb'))
                                     ->directory('images')
+                                    ->image()
                                     ->imageEditor()
-                                    ->image(),
+                                    ->imageResizeMode('cover')
+                                    ->imageResizeTargetWidth('600'),
 
                                 FileUpload::make('images')
                                     ->label(trans('dashboard.images'))
