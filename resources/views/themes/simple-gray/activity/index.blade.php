@@ -81,10 +81,11 @@
                         <div class="p-4">
                             <a href="{{route('posts.show', $post->slug)}}">
                                 <h2 class="text-xl font-semibold mb-2">{{$post->title}}</h2>
-                            </a>
 
-                            <p class="text-gray-600 mb-2">{!! $post->short !!}</p>
-                            <span class="text-gray-500 text-sm">{{$post->dateTime()}}</span>
+
+                                <p class="text-gray-600 mb-2">{!! $post->short !!}</p>
+                                <span class="text-gray-500 text-sm">{{$post->dateTime()}}</span>
+                            </a>
                         </div>
 
                     </div>
