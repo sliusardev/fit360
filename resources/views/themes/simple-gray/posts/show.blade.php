@@ -23,15 +23,18 @@
                 </div>
             </div>
         </div>
-        <h2 class="text-2xl font-bold my-4">Галерея</h2>
-        <div class="grid grid-cols-2 gap-4">
-            @foreach($post->images as $image)
-                <a href="/storage/{{$image}}" data-fancybox="gallery" data-caption="{{$post->title}}" class="bg-gray-200 rounded-lg overflow-hidden">
-                    <img src="/storage/{{$image}}"  class="w-full h-48 object-cover"/>
-                </a>
-            @endforeach
+        @if(!empty($post->images))
+            <h2 class="text-2xl font-bold my-4">Галерея</h2>
+            <div class="grid grid-cols-2 gap-4">
+                @foreach($post->images as $image)
+                    <a href="/storage/{{$image}}" data-fancybox="gallery" data-caption="{{$post->title}}" class="bg-gray-200 rounded-lg overflow-hidden">
+                        <img src="/storage/{{$image}}"  class="w-full h-48 object-cover"/>
+                    </a>
+                @endforeach
 
-        </div>
+            </div>
+        @endif
+
 
     </div>
 @endsection
