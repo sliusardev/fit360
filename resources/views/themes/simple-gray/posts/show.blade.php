@@ -6,7 +6,9 @@
             <i class="fas fa-chevron-left"></i>
         </a>
         <div class="bg-white rounded-lg shadow-md">
-            <img src="{{$post->thumbnailUrl()}}" alt="{{$post->title}}" class="w-full h-auto object-cover">
+            @if($post->thumbnailUrl())
+                <img src="{{$post->thumbnailUrl()}}" alt="{{$post->title}}" class="w-full h-auto object-cover">
+            @endif
             <div class="p-4">
                 <h1 class="text-xl font-semibold mb-2">{{$post->title}}</h1>
                 <p class="text-gray-600 mb-2">{!! $post->content !!}</p>

@@ -72,9 +72,12 @@
             @foreach($posts as $post)
                 <div class="swiper-slide">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden my-3">
-                        <a href="{{route('posts.show', $post->slug)}}">
-                            <img src="{{$post->thumbnailUrl()}}" alt="Blog Image" class="w-full h-48 object-cover">
-                        </a>
+                        @if($post->thumbnailUrl())
+                            <a href="{{route('posts.show', $post->slug)}}">
+                                <img src="{{$post->thumbnailUrl()}}" alt="Blog Image" class="w-full h-48 object-cover">
+                            </a>
+                        @endif
+
                         <div class="p-4">
                             <a href="{{route('posts.show', $post->slug)}}">
                                 <h2 class="text-xl font-semibold mb-2">{{$post->title}}</h2>

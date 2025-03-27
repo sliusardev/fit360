@@ -9,9 +9,12 @@
         <div class="grid grid-cols-1 gap-6 py-3 my-3">
             @foreach($posts as $post)
                 <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105">
-                    <a href="{{route('posts.show', $post->slug)}}">
-                        <img src="{{$post->thumbnailUrl()}}" alt="Blog Image" class="w-full h-auto object-cover">
-                    </a>
+                    @if($post->thumbnailUrl())
+                        <a href="{{route('posts.show', $post->slug)}}">
+                            <img src="{{$post->thumbnailUrl()}}" alt="Blog Image" class="w-full h-auto object-cover">
+                        </a>
+                    @endif
+
                     <div class="p-4">
                         <a href="{{route('posts.show', $post->slug)}}">
                             <h2 class="text-xl font-semibold mb-2">{{$post->title}}</h2>

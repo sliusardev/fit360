@@ -6,6 +6,7 @@ use App\Models\TelegraphChatUser;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Process;
 use Log;
 
 class TelegraphService
@@ -28,8 +29,11 @@ class TelegraphService
             }
 
             // Run the artisan command to set the webhook
-            Artisan::call('telegraph:unset-webhook', ['bot' => $bot->id]);
-            Artisan::call('telegraph:set-webhook', ['bot' => $bot->id]);
+//            Artisan::call('telegraph:unset-webhook', ['bot' => $bot->id]);
+//            Artisan::call('telegraph:set-webhook', ['bot' => $bot->id]);
+
+            Process::run("php artisan telegraph:unset-webhook {$bot->id}");
+            Process::run("php artisan telegraph:set-webhook {$bot->id}");
 
             Log::info('Webhook successfully set for the main bot.');
         } catch (\Exception $e) {
