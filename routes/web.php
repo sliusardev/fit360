@@ -68,4 +68,5 @@ Route::prefix('posts')->group(function () {
     Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
 });
 
+
 // Route::post('/telegram/webhook', [TelegramBotController::class, 'handleWebhook']);
