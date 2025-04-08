@@ -13,7 +13,11 @@
             @foreach($trainers as $trainer)
 
                 <div class="bg-white p-4 rounded-lg shadow">
-                    <img class="w-full h-100 object-cover rounded-lg mb-2" src="{{$trainer->getImageUrl()}}" alt="{{$trainer->name}}"/>
+
+                    @if($trainer->getImageUrl())
+                        <img class="w-full h-100 object-cover rounded-lg mb-2" src="{{$trainer->getImageUrl()}}" alt="{{$trainer->name}}"/>
+                    @endif
+
                     <h4 class="text-md font-semibold text-gray-800 mb-2 text-center">
                         {{$trainer->name}}
                     </h4>
