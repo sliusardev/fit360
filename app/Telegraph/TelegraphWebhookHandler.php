@@ -16,6 +16,7 @@ use DefStudio\Telegraph\Keyboard\ReplyButton;
 use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Stringable;
 
 class TelegraphWebhookHandler extends WebhookHandler
@@ -63,10 +64,11 @@ class TelegraphWebhookHandler extends WebhookHandler
         $user = TelegraphService::getUserByChatId($this->chat->chat_id);
 
         if ($user) {
-            Telegraph::message("Привіт $user->full_name!")
-                ->replyKeyboard(ReplyKeyboard::make()->buttons($this->defaultUserButtons))->send();
+            $this->chat->message("Привіт {$user->full_name}!")
+                ->replyKeyboard(ReplyKeyboard::make()->buttons($this->defaultUserButtons))
+                ->send();
         } else {
-            Telegraph::message('Привіт! Підключися до акаунта. Або зареєструйся')
+            $this->chat->message('Привіт! Підключися до акаунта. Або зареєструйся')
                 ->replyKeyboard(ReplyKeyboard::make()->buttons($this->defaultGuestButtons))->send();
         }
     }

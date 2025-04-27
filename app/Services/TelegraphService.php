@@ -21,6 +21,7 @@ class TelegraphService
     public static function setMainWebhook(): void
     {
         try {
+
             $bot = TelegraphBot::query()->where("token", env('TELEGRAM_BOT_TOKEN'))->first();
 
             if (!$bot) {
@@ -28,18 +29,9 @@ class TelegraphService
                 return;
             }
 
-            // Run the artisan command to set the webhook
-            $unsetResult = Process::run("php artisan telegraph:unset-webhook");
-            if (!$unsetResult->successful()) {
-                Log::error('Failed to unset webhook: ' . $unsetResult->errorOutput());
-                return;
-            }
+            $bot->unregisterWebhook()->send();
 
-            $setResult = Process::run("php artisan telegraph:set-webhook {$bot->id}");
-            if (!$setResult->successful()) {
-                Log::error('Failed to set webhook: ' . $setResult->errorOutput());
-                return;
-            }
+            $bot->registerWebhook()->send();
 
             Log::info('Webhook successfully set for the main bot.');
         } catch (\Exception $e) {
