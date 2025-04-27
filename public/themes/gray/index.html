@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gray Theme Landing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#383838',
+                        secondary: '#6B7280',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-primary">
+                    Logo
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-primary hover:text-gray-600 font-medium">Home</a>
+                    <a href="#" class="text-primary hover:text-gray-600 font-medium">Activities</a>
+                    <a href="#" class="text-primary hover:text-gray-600 font-medium">About</a>
+                    <a href="#" class="text-primary hover:text-gray-600 font-medium">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button class="text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to Our Platform</h1>
+                <p class="text-xl mb-10">Discover amazing activities and events happening around you</p>
+                <a href="#" class="bg-white text-primary px-8 py-3 rounded-md font-medium hover:bg-gray-100 transition">
+                    Explore Activities
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Activities -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-primary">Featured Activities</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Activity Card 1 -->
+                <div class="bg-white p-4 rounded-lg shadow-xl">
+                    <div class="bg-gray-100 text-dark text-xs font-semibold px-2 py-1 rounded mb-2 text-center">
+                        10:00 AM - 12:00 PM
+                    </div>
+                    <h4 class="text-md font-semibold text-gray-800 mb-2 text-center">
+                        Yoga Session
+                    </h4>
+                    <p class="text-sm text-gray-600 text-center">
+                        Кількість місць: <span class="font-bold">20</span>
+                    </p>
+                    <p class="text-sm text-gray-600 text-center mb-4">
+                        Залишилось місць: <span class="font-bold">8</span>
+                    </p>
+                    <a class="bg-[#383838] text-white rounded-md w-full py-2 text-center block hover:bg-gray-700 transition" href="#">
+                        Переглянути
+                    </a>
+                </div>
+
+                <!-- Activity Card 2 -->
+                <div class="bg-white p-4 rounded-lg shadow-xl">
+                    <div class="bg-gray-100 text-dark text-xs font-semibold px-2 py-1 rounded mb-2 text-center">
+                        2:00 PM - 4:00 PM
+                    </div>
+                    <h4 class="text-md font-semibold text-gray-800 mb-2 text-center">
+                        Art Workshop
+                    </h4>
+                    <p class="text-sm text-gray-600 text-center">
+                        Кількість місць: <span class="font-bold">15</span>
+                    </p>
+                    <p class="text-sm text-gray-600 text-center mb-4">
+                        Залишилось місць: <span class="font-bold">5</span>
+                    </p>
+                    <a class="bg-[#383838] text-white rounded-md w-full py-2 text-center block hover:bg-gray-700 transition" href="#">
+                        Переглянути
+                    </a>
+                </div>
+
+                <!-- Activity Card 3 -->
+                <div class="bg-white p-4 rounded-lg shadow-xl">
+                    <div class="bg-gray-100 text-dark text-xs font-semibold px-2 py-1 rounded mb-2 text-center">
+                        6:00 PM - 8:00 PM
+                    </div>
+                    <h4 class="text-md font-semibold text-gray-800 mb-2 text-center">
+                        Cooking Class
+                    </h4>
+                    <p class="text-sm text-gray-600 text-center">
+                        Кількість місць: <span class="font-bold">12</span>
+                    </p>
+                    <p class="text-sm text-gray-600 text-center mb-4">
+                        Залишилось місць: <span class="font-bold">3</span>
+                    </p>
+                    <a class="bg-[#383838] text-white rounded-md w-full py-2 text-center block hover:bg-gray-700 transition" href="#">
+                        Переглянути
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-gray-200 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-primary">Ready to join an activity?</h2>
+            <p class="text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
+                Browse our full catalog of activities and find something that interests you
+            </p>
+            <a href="#" class="bg-primary text-white px-8 py-3 rounded-md font-medium hover:bg-gray-700 transition">
+                View All Activities
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About Us</h3>
+                    <p class="text-gray-300">
+                        We provide a platform for discovering and joining various activities in your area.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Activities</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <address class="not-italic text-gray-300">
+                        <p>Email: info@example.com</p>
+                        <p>Phone: +1 234 567 890</p>
+                    </address>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-6 text-center text-gray-300">
+                <p>&copy; 2023 Your Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

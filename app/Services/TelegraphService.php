@@ -29,11 +29,17 @@ class TelegraphService
             }
 
             // Run the artisan command to set the webhook
-//            Artisan::call('telegraph:unset-webhook', ['bot' => $bot->id]);
-//            Artisan::call('telegraph:set-webhook', ['bot' => $bot->id]);
+            $unsetResult = Process::run("php artisan telegraph:unset-webhook {$bot->id}");
+            if (!$unsetResult->successful()) {
+                Log::error('Failed to unset webhook: ' . $unsetResult->errorOutput());
+                return;
+            }
 
-            Process::run("php artisan telegraph:unset-webhook {$bot->id}");
-            Process::run("php artisan telegraph:set-webhook {$bot->id}");
+            $setResult = Process::run("php artisan telegraph:set-webhook {$bot->id}");
+            if (!$setResult->successful()) {
+                Log::error('Failed to set webhook: ' . $setResult->errorOutput());
+                return;
+            }
 
             Log::info('Webhook successfully set for the main bot.');
         } catch (\Exception $e) {
