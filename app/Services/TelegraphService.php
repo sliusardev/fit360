@@ -29,7 +29,7 @@ class TelegraphService
             }
 
             // Run the artisan command to set the webhook
-            $unsetResult = Process::run("php artisan telegraph:unset-webhook {$bot->id}");
+            $unsetResult = Process::run("php artisan telegraph:unset-webhook");
             if (!$unsetResult->successful()) {
                 Log::error('Failed to unset webhook: ' . $unsetResult->errorOutput());
                 return;
