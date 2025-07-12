@@ -54,7 +54,7 @@
                                     @break
 
                                 @case(App\Enums\SurveyTypeEnum::RATING->value)
-                                    <div class="flex flex-wrap gap-4">
+                                    <div class="flex flex-wrap gap-2">
                                         @for ($i = 1; $i <= 10; $i++)
                                             <label class="flex flex-col items-center space-y-1 cursor-pointer">
                                                 <input type="radio" name="answers[{{ $index }}]" value="{{ $i }}"
