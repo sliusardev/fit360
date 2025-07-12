@@ -6,6 +6,8 @@ use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PriceListController;
+use App\Http\Controllers\SurveyAnswerController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TelegramBotController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Middleware\ClientMiddleware;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 //    return view('welcome');
     return redirect()->route('activity');
-})->name('welcome');
+})->name('home');
 
 Route::get('contacts', [PageController::class, 'contacts'])->name('page.contacts');
 
@@ -56,6 +58,11 @@ Route::prefix('price-list')->group(function () {
 Route::prefix('feedback')->group(function () {
     Route::get('/', [FeedBackController::class, 'index'])->name('feedback.index');
     Route::post('/store', [FeedBackController::class, 'store'])->name('feedback.store');
+});
+
+Route::prefix('survey')->group(function () {
+    Route::get('/{survey}', [SurveyController::class, 'show'])->name('surveys.show');
+    Route::post('/{survey}/submit', [SurveyAnswerController::class, 'store'])->name('surveys.submit');
 });
 
 Route::prefix('before-after')->group(function () {
