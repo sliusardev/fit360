@@ -26,7 +26,7 @@ class ThemeService
     public static function themeView(string $bladeName, array $params = [])
     {
         if (empty(self::templateRecoursePath())) {
-            return redirect('welcome');
+            return redirect('home');
         }
 
         return view(self::templateRecoursePath() .'/'.$bladeName, $params);
