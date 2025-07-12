@@ -65,6 +65,17 @@
                 </p>
             </a>
         @endauth
+
+    </div>
+
+    <div class="w-full my-3">
+        <a class="bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg p-4 text-center block transition-all duration-300 hover:shadow-md hover:from-gray-300 hover:to-gray-200 transform hover:-translate-y-1" href="{{route('surveys.show', 1)}}">
+            <i class="fas fa-comment-alt text-gray-500 text-2xl mb-2 block animate-pulse"></i>
+            <p class="text-sm font-semibold uppercase tracking-wide">
+                Анонімний відгук
+            </p>
+            <span class="text-xs text-gray-500 mt-1 block">Поділіться своєю думкою</span>
+        </a>
     </div>
 
     <div class="swiper">
