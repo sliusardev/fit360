@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('type')->default(SurveyTypeEnum::TEXT->value);
             $table->json('options')->nullable(); // For storing custom answer options
             $table->integer('order')->default(0);
+            $table->boolean('is_required')->default(true);
             $table->timestamps();
         });
     }
