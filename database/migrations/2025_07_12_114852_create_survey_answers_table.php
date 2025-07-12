@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('survey_answers', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('survey_id');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

@@ -15,18 +15,6 @@ class SurveyController extends Controller
             abort(404);
         }
 
-        $survey->load(['questions']);
-
         return themeView('surveys.show', compact('survey'));
-    }
-
-    public function submit(Request $request, Survey $survey)
-    {
-        return redirect()->route('surveys.thankyou');
-    }
-
-    public function thankYou(Request $request)
-    {
-        return themeView('surveys.thankyou');
     }
 }

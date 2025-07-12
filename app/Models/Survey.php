@@ -11,14 +11,11 @@ class Survey extends Model
         'title',
         'description',
         'is_active',
+        'questions',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'questions' => 'json',
     ];
-
-    public function questions(): HasMany
-    {
-        return $this->hasMany(SurveyQuestion::class)->orderBy('order');
-    }
 }

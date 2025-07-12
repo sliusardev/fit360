@@ -64,7 +64,6 @@ class SurveyResource extends Resource
                     ->schema([
                         Forms\Components\Repeater::make('questions')
                             ->label('Питання')
-                            ->relationship()
                             ->schema([
                                 Forms\Components\Textarea::make('question')
                                     ->label('Текст питання')
@@ -75,7 +74,6 @@ class SurveyResource extends Resource
                                     ->options(SurveyTypeEnum::getOptions())
                                     ->live()
                                     ->required(),
-
                                 Forms\Components\Repeater::make('options')
                                     ->schema([
                                         Forms\Components\TextInput::make('option')
