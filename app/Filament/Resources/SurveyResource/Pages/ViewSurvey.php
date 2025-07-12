@@ -13,9 +13,6 @@ class ViewSurvey extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('results')
-                ->label('Результати')
-                ->url(fn () => static::getResource()::getUrl('results', ['record' => $this->record])),
             Actions\Action::make('qrcode')
                 ->label('QR-код')
                 ->url(fn () => static::getResource()::getUrl('qrcode', ['record' => $this->record])),

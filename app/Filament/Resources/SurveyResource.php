@@ -106,9 +106,6 @@ class SurveyResource extends Resource
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('Активна')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('responses_count')
-                    ->label('Відповіді')
-                    ->counts('responses'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Створено')
                     ->dateTime('d.m.Y H:i')
@@ -163,12 +160,6 @@ class SurveyResource extends Resource
                             ->openUrlInNewTab()
                             ->state(fn (Survey $record) => route('surveys.show', $record)),
                     ]),
-                Infolists\Components\Section::make('Результати анкетування')
-                    ->schema([
-                        Infolists\Components\TextEntry::make('responses_count')
-                            ->label('Кількість відповідей')
-                            ->state(fn (Survey $record) => $record->responses()->count()),
-                    ]),
             ]);
     }
 
@@ -197,7 +188,6 @@ class SurveyResource extends Resource
             'view' => Pages\ViewSurvey::route('/{record}'),
             'edit' => Pages\EditSurvey::route('/{record}/edit'),
             'qrcode' => Pages\QrcodeSurvey::route('/{record}/qrcode'),
-            'results' => Pages\SurveyResults::route('/{record}/results'),
         ];
     }
 }

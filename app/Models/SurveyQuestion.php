@@ -15,6 +15,7 @@ class SurveyQuestion extends Model
         'type',
         'options',
         'order',
+        'is_required',
     ];
 
     protected $casts = [
