@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\SurveyTypeEnum;
 use App\Filament\Resources\SurveyResource\Pages;
+use App\Filament\Resources\SurveyResource\RelationManagers\AnswersRelationManager;
 use App\Models\Survey;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -18,7 +19,7 @@ class SurveyResource extends Resource
 {
     protected static ?string $model = Survey::class;
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $navigationGroup = 'Content';
 
@@ -164,7 +165,7 @@ class SurveyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+//            AnswersRelationManager::class,
         ];
     }
 

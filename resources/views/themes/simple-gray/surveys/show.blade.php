@@ -77,8 +77,9 @@
                                             @foreach($question['options'] as $optionIndex => $option)
                                                 <div class="flex items-center">
                                                     <input id="option-{{ $index }}-{{ $optionIndex }}"
-                                                        name="answers[{{ $index }}]" type="checkbox"
-                                                        value="{{ $optionIndex }}"
+                                                        name="answers[{{ $index }}][]"
+                                                        type="checkbox"
+                                                        value="{{ $option['option'] }}"
                                                         class="h-5 w-5 text-blue-600 border-gray-300 focus:ring-blue-500">
                                                     <label for="option-{{ $index }}-{{ $optionIndex }}"
                                                         class="ml-3 text-gray-700 px-2">{{ $option['option'] }}</label>

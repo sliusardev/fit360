@@ -16,6 +16,11 @@ class Survey extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'questions' => 'json',
+        'questions' => 'array',
     ];
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(SurveyAnswer::class);
+    }
 }
