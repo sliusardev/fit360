@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enums\PaymentStatusEnum;
-use App\Models\Company;
 use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,8 +20,6 @@ class MonobankService
 
         $amountMinor = (int) round($amount * 100);
         $reference = 'mono_' . uniqid();
-
-        $amountMinor = 100;
 
         $payload = [
             'amount' => $amountMinor,
@@ -81,8 +78,6 @@ class MonobankService
             return response()->json(['status' => 'error', 'message' => 'invalid json'], 400);
         }
 
-        // Verify signature if present
-//        $token = config('services.monobank.token');
         $receivedSign = $request->header('X-Sign', '');
 
         if ($receivedSign !== '') {
@@ -95,23 +90,11 @@ class MonobankService
 
             if (!$verified) {
                 Log::warning('Monobank webhook: invalid ECDSA signature', ['x_sign' => $receivedSign]);
+                return response()->json(['status' => 'error', 'message' => 'invalid signature'], 401);
             }
         } else {
             Log::info('Monobank webhook: no X-Sign header');
         }
-
-//        if (!empty($receivedSign)) {
-//            $expected = base64_encode(hash_hmac('sha256', $content, $token, true));
-//            if (!hash_equals($expected, $receivedSign)) {
-//                Log::warning('Monobank webhook: invalid signature', [
-//                    'expected' => $expected,
-//                    'received' => $receivedSign,
-//                ]);
-//                // Continue but mark as suspicious
-//            }
-//        } else {
-//            Log::info('Monobank webhook: no signature header provided');
-//        }
 
         Log::info('Monobank webhook payload', $data);
 
@@ -169,26 +152,28 @@ class MonobankService
                 ])->get('https://api.monobank.ua/api/merchant/pubkey');
 
                 if (!$resp->ok()) {
+                    Log::error('Failed to fetch Monobank pubkey', [
+                        'status' => $resp->status(),
+                        'body' => $resp->body()
+                    ]);
                     throw new \RuntimeException('Failed to fetch Monobank pubkey');
                 }
 
-                // Encode the public key in Base64 before storing it in the cache
-                return base64_encode($resp->body());
+                return $resp->body();
             });
 
-            // Decode the Base64 public key before using it
-            $decodedPem = base64_decode($pem, true);
-            if (!$decodedPem) return false;
+            $publicKey = openssl_pkey_get_public($pem);
+            if (!$publicKey) {
+                throw new \RuntimeException('Invalid public key format');
+            }
 
-            $publicKey = openssl_pkey_get_public($decodedPem);
-            if ($publicKey === false) return false;
+            $signature = base64_decode($xSignBase64);
+            $verified = openssl_verify($rawBody, $signature, $publicKey, OPENSSL_ALGO_SHA256);
 
-            // У PHP для ECDSA достатньо SHA256 – OpenSSL сам визначає тип ключа (EC)
-            return openssl_verify($rawBody, $signature, $publicKey, OPENSSL_ALGO_SHA256) === 1;
+            return $verified === 1;
         } catch (\Throwable $e) {
             Log::error('Monobank signature verification error', ['e' => $e->getMessage()]);
             return false;
         }
     }
 }
-
