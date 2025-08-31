@@ -79,7 +79,7 @@ Route::prefix('posts')->group(function () {
 // Monobank pay init
 Route::post('/monobank/pay', [MonobankController::class, 'pay'])->name('monobank.pay');
 
-Route::post('/monobank/webhook', [MonobankController::class, 'webhook'])
+Route::post('/billing/callback/monobank/webhook', [MonobankController::class, 'webhook'])
     ->name('monobank.webhook')
     ->withoutMiddleware(['csrf']);
 
