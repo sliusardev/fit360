@@ -76,11 +76,13 @@ class MonobankController extends Controller
 
         $status = 'В обробці';
 
-        if ($payment->status === PaymentStatusEnum::PAID) {
+        dd($payment->status);
+
+        if ($payment->status === PaymentStatusEnum::PAID->value) {
             $status = 'Сплачено';
         }
 
-        if ($payment->status === PaymentStatusEnum::FAILED) {
+        if ($payment->status === PaymentStatusEnum::FAILED->value) {
             $status = 'Не вдалося';
         }
 
