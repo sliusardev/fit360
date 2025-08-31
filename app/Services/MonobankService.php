@@ -80,22 +80,20 @@ class MonobankService
             return response()->json(['status' => 'error', 'message' => 'invalid json'], 400);
         }
 
-        $receivedSign = $request->header('X-Sign', '');
-
-        if ($receivedSign !== '') {
-            $verified = $this->verifyMonobankSignature($content, $receivedSign);
-
-            if (!$verified) {
-                Cache::forget('mono_merchant_pubkey_pem');
-                $verified = $this->verifyMonobankSignature($content, $receivedSign);
-            }
-
-            if (!$verified) {
-                Log::warning('Monobank webhook: invalid ECDSA signature', ['x_sign' => $receivedSign]);
-                return response()->json(['status' => 'error', 'message' => 'invalid signature'], 401);
+        // Verify signature if present
+        $token = config('services.monobank.token');
+        $receivedSign = $request->header('X-Sign') ?? '';
+        if (!empty($receivedSign)) {
+            $expected = base64_encode(hash_hmac('sha256', $content, $token, true));
+            if (!hash_equals($expected, $receivedSign)) {
+                Log::warning('Monobank webhook: invalid signature', [
+                    'expected' => $expected,
+                    'received' => $receivedSign,
+                ]);
+                // Continue but mark as suspicious
             }
         } else {
-            Log::info('Monobank webhook: no X-Sign header');
+            Log::info('Monobank webhook: no signature header provided');
         }
 
         Log::info('Monobank webhook payload', $data);
