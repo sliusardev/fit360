@@ -171,16 +171,17 @@ class MonobankService
                 if (!$resp->ok()) {
                     throw new \RuntimeException('Failed to fetch Monobank pubkey');
                 }
-                return base64_decode($resp->body());
+
+                // Encode the public key in Base64 before storing it in the cache
+                return base64_encode($resp->body());
             });
 
-            if (!$pem) return false;
+            // Decode the Base64 public key before using it
+            $decodedPem = base64_decode($pem, true);
+            if (!$decodedPem) return false;
 
-            $publicKey = openssl_pkey_get_public($pem);
+            $publicKey = openssl_pkey_get_public($decodedPem);
             if ($publicKey === false) return false;
-
-            $signature = base64_decode($xSignBase64, true);
-            if ($signature === false) return false;
 
             // У PHP для ECDSA достатньо SHA256 – OpenSSL сам визначає тип ключа (EC)
             return openssl_verify($rawBody, $signature, $publicKey, OPENSSL_ALGO_SHA256) === 1;
