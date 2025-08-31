@@ -107,7 +107,7 @@ class MonobankService
             return response()->json(['status' => 'error', 'message' => 'missing invoiceId'], 400);
         }
 
-        $payment = Payment::query()->where('payment_id', $invoiceId)->first();
+        $payment = Payment::query()->where('invoice_id', $invoiceId)->first();
 
         if ($payment && $status === PaymentStatusEnum::PAID) {
             $this->updateCompany($payment);
