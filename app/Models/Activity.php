@@ -112,7 +112,7 @@ class Activity extends Model
                 'user_id' => $user->id,
                 'payment_id' => $payment->id,
                 'name' => $user->full_name,
-                'status' => $payment->status,
+                'status' => trans('dashboard' . $payment->status) ?? '',
                 'date' => $payment->updated_at->format('d.m.Y H:i'),
             ];
         })->filter();
