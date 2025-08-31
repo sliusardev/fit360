@@ -63,6 +63,13 @@
         </div>
     @endif
 
+    @if(session('info'))
+        <div class="alert alert-info alert-dismissible fade show p-o" role="alert">
+            {{session('info')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     @yield('content')
 
     @include('themes.default.inc.bottom-mobile-menu')

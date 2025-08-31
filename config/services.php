@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'monobank' => [
+        // If env not set, you can also paste directly here for local testing
+        'token' => env('MONOBANK_TOKEN'),
+        'base_url' => env('MONOBANK_BASE_URL', 'https://api.monobank.ua'),
+    ],
+
 ];

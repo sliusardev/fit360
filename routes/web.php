@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BeforeAfterController;
+use App\Http\Controllers\Billing\MonobankController;
 use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
@@ -74,6 +75,16 @@ Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
     Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
 });
+
+// Monobank pay init
+Route::post('/monobank/pay', [MonobankController::class, 'pay'])->name('monobank.pay');
+
+Route::post('/monobank/webhook', [MonobankController::class, 'webhook'])
+    ->name('monobank.webhook')
+    ->withoutMiddleware(['csrf']);
+
+Route::match(['get','post'], '/monobank/return/{payment_id}', [MonobankController::class, 'return'])
+    ->name('monobank.return');
 
 
 // Route::post('/telegram/webhook', [TelegramBotController::class, 'handleWebhook']);

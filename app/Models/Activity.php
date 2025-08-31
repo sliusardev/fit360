@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Collection;
 
 class Activity extends Model
 {
@@ -95,6 +97,25 @@ class Activity extends Model
     public function startTimeHuman()
     {
         return $this->start_time->locale('uk')->isoFormat("D MMMM Y HH:mm, dddd");
+    }
+
+    public function payments(): morphMany
+    {
+        return $this->morphMany(Payment::class, 'payable')->with('user');
+    }
+
+    public function paymentUsers(): Collection
+    {
+        return $this->payments()->with('user')->get()->map(function ($payment) {
+            $user = $payment->user;
+            return [
+                'user_id' => $user->id,
+                'payment_id' => $payment->id,
+                'name' => $user->full_name,
+                'status' => $payment->status,
+                'date' => $payment->updated_at->format('d.m.Y H:i'),
+            ];
+        })->filter();
     }
 
 }

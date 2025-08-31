@@ -51,7 +51,11 @@ class ActivityController extends Controller
             return redirect('/');
         }
 
-        return themeView('activity.show', compact('activity'));
+        $payments = $activity->paymentUsers();
+
+        $currentUserPayed = $payments->where('user_id', auth()->id())->first();
+
+        return themeView('activity.show', compact('activity', 'payments', 'currentUserPayed'));
     }
 
     public function join($id)

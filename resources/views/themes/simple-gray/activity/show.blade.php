@@ -67,6 +67,25 @@
                             <a class="bg-red-500 text-white rounded-md w-full py-2 text-sm text-center block" href="{{route('activity.cancelJoin', $activity->id)}}">
                                 Відмінити
                             </a>
+
+                            @if(!$currentUserPayed && auth()->user()->isAdmin())
+                                <form action="" method="POST" class="my-3">
+                                    @csrf
+                                    <input type="hidden" name="payable_type" value="{{\App\Models\Activity::class}}">
+                                    <input type="hidden" name="payable_id" value="{{$activity->id}}">
+                                    <input type="hidden" name="amount" value="{{$activity->price}}">
+                                    <input type="hidden" name="name" value="{{$activity->title}}">
+
+                                    <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn  btn-lg bg-gray-800 text-white rounded-md w-full py-2 text-sm flex justify-center" aria-label="Оплатити online">
+                                        <span>Оплатити online</span>
+                                        <span class="badge text-bg-secondary">
+                                            <img src="{{ asset('assets/images/billing/footer_plata_dark_bg@2x.png') }}" alt="Monobank Logo" class="img-fluid" style="height: 20px; margin-left: 8px;">
+                                        </span>
+                                    </button>
+                                </form>
+                            @endif
+
+
                         @else
                             <a class="bg-[#383838] text-white rounded-md w-full py-2 text-sm text-center block" href="{{route('activity.join', $activity->id)}}">
                                 Приєднатися
@@ -84,6 +103,21 @@
                                 <li>{{$user->full_name ?? 'Клієнт'}}</li>
                             @endforeach
                         </ul>
+
+                        @if($payments->isNotEmpty())
+                            <h4 class="text-md font-semibold text-gray-800 mt-4 mb-2">
+                                Клієнти, що заплатили онлайн
+                            </h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600">
+                                @foreach($payments as $item)
+                                    <li class="flex justify-between">
+                                        <span class="bg-blue-100 p-2 rounded-1">{{$item['name']}}</span>
+                                        <span class="bg-grey-100 p-2 rounded-1">{{$item['date']}}</span>
+                                        <span class="bg-green-100 p-2 rounded-1"> статус: {{$item['status']}}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
 
                     @endif
                 @endauth
