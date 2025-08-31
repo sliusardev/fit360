@@ -74,14 +74,14 @@ class MonobankController extends Controller
             return response()->redirectToRoute('activity')->with('error', 'Платіж не знайдено.');
         }
 
-        $status = 'В обробці';
+        $status = trans('dashboard.pending');
 
         if ($payment->status === PaymentStatusEnum::PAID->value) {
-            $status = 'Сплачено';
+            $status = trans('dashboard.paid');
         }
 
         if ($payment->status === PaymentStatusEnum::FAILED->value) {
-            $status = 'Не вдалося';
+            $status = trans('dashboard.failed');
         }
 
         if ($payment->payable_type === 'App\Models\Activity' && $payment->activity) {
