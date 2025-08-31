@@ -68,7 +68,7 @@
                                 Відмінити
                             </a>
 
-                            @if(!$currentUserPayed  && auth()->user()->isAdmin() || $currentUserPayed && $currentUserPayed['status'] == 'paid')
+                            @if(!$currentUserPayed  && auth()->user()->isAdmin() || $currentUserPayed && $currentUserPayed['status'] !== 'paid')
                                 <form action="" method="POST" class="my-3">
                                     @csrf
                                     <input type="hidden" name="payable_type" value="{{\App\Models\Activity::class}}">
