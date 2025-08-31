@@ -109,10 +109,6 @@ class MonobankService
 
         $payment = Payment::query()->where('invoice_id', $invoiceId)->first();
 
-        if ($payment && $status === PaymentStatusEnum::PAID) {
-            $this->updateCompany($payment);
-        }
-
         if ($payment) {
             $payment->update([
                 'status'  => $status,
