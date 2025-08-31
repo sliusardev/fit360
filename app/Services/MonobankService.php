@@ -72,45 +72,50 @@ class MonobankService
 
     public function handleWebhook(Request $request): JsonResponse
     {
-        $content = $request->getContent();
-        $data = json_decode($content, true);
+        // 1) Сирий body — важливо не перекодувати!
+        $body = $request->getContent();
+        $data = json_decode($body, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            Log::error('Monobank webhook: invalid JSON', ['content' => $content]);
+            Log::error('Monobank webhook: invalid JSON', ['content' => $body]);
             return response()->json(['status' => 'error', 'message' => 'invalid json'], 400);
         }
 
-        // Verify signature if present
-        $token = config('services.monobank.token');
-        $receivedSign = $request->header('X-Sign') ?? '';
-        if (!empty($receivedSign)) {
-            $expected = base64_encode(hash_hmac('sha256', $content, $token, true));
-            if (!hash_equals($expected, $receivedSign)) {
-                Log::warning('Monobank webhook: invalid signature', [
-                    'expected' => $expected,
-                    'received' => $receivedSign,
-                ]);
-                // Continue but mark as suspicious
+        // 2) Перевірка ECDSA X-Sign
+        $xSign = (string) ($request->header('X-Sign') ?? '');
+        if ($xSign === '') {
+            Log::warning('Monobank webhook: no X-Sign header');
+            return response()->json(['status' => 'error', 'message' => 'missing signature'], 400);
+        }
+
+        if (!$this->verifyMonobankSignature($body, $xSign)) {
+            // Спробуємо один раз оновити ключ (на випадок ротації) і перевірити знову
+            Cache::forget('monobank:pubkey:pem');
+            if (!$this->verifyMonobankSignature($body, $xSign)) {
+                Log::warning('Monobank webhook: invalid signature after refresh');
+                // Повертаємо 400 — monobank зробить до 3 ретраїв, як у доках.
+                return response()->json(['status' => 'error', 'message' => 'invalid signature'], 400);
             }
-        } else {
-            Log::info('Monobank webhook: no signature header provided');
         }
 
         Log::info('Monobank webhook payload', $data);
 
-        $status = $this->mapStatus($data);
-        $invoiceId = $data['invoiceId'] ?? null;
-
+        $status   = $this->mapStatus($data); // твоя логіка мапінгу
+        $invoiceId = $data['invoiceId'] ?? ($data['orderReference'] ?? null);
         if (!$invoiceId) {
             Log::error('Monobank webhook: missing invoiceId', $data);
             return response()->json(['status' => 'error', 'message' => 'missing invoiceId'], 400);
         }
 
-        $payment = Payment::query()->where('invoice_id', $invoiceId)->first();
+        $payment = Payment::query()->where('payment_id', $invoiceId)->first();
+
+        if ($payment && $status === PaymentStatusEnum::PAID) {
+            $this->updateCompany($payment);
+        }
 
         if ($payment) {
             $payment->update([
-                'status' => $status,
+                'status'  => $status,
                 'payload' => $data,
             ]);
         } else {
@@ -118,6 +123,54 @@ class MonobankService
         }
 
         return response()->json(['status' => 'ok']);
+    }
+
+    /**
+     * Перевіряє X-Sign (ECDSA SHA256) від monobank.
+     */
+    private function verifyMonobankSignature(string $body, string $xSignBase64): bool
+    {
+        try {
+            $pem = Cache::remember('monobank:pubkey:pem', 60 * 60 * 24, function () {
+                $baseUrl = rtrim(config('services.monobank.base_url', 'https://api.monobank.ua'), '/');
+                $token   = config('services.monobank.token');
+
+                $resp = Http::withHeaders(['X-Token' => $token])
+                    ->get($baseUrl . '/api/merchant/pubkey');
+
+                if (!$resp->ok()) {
+                    Log::error('Monobank pubkey fetch failed', ['status' => $resp->status(), 'body' => $resp->body()]);
+                    throw new \RuntimeException('pubkey fetch failed');
+                }
+
+                // API повертає base64 від PEM
+                $pem = base64_decode($resp->body(), true);
+                if ($pem === false || !str_contains($pem, 'BEGIN PUBLIC KEY')) {
+                    throw new \RuntimeException('invalid pubkey format');
+                }
+
+                return $pem;
+            });
+
+            $publicKey = openssl_pkey_get_public($pem);
+            if ($publicKey === false) {
+                Log::error('Monobank pubkey invalid PEM');
+                return false;
+            }
+
+            $signature = base64_decode($xSignBase64, true);
+            if ($signature === false) {
+                Log::warning('Monobank X-Sign not base64');
+                return false;
+            }
+
+            // ECDSA SHA256 перевірка
+            $ok = openssl_verify($body, $signature, $publicKey, OPENSSL_ALGO_SHA256) === 1;
+            return $ok;
+        } catch (\Throwable $e) {
+            Log::error('Monobank signature verify error', ['e' => $e->getMessage()]);
+            return false;
+        }
     }
 
     protected function mapCurrencyCode(string $currency): int
@@ -140,40 +193,5 @@ class MonobankService
             'reversed', 'refund' => PaymentStatusEnum::REFUNDED,
             default => PaymentStatusEnum::PENDING,
         };
-    }
-
-    private function verifyMonobankSignature(string $rawBody, string $xSignBase64): bool
-    {
-        try {
-            $pem = Cache::remember('mono_merchant_pubkey_pem', 3600, function () {
-                $resp = Http::withHeaders([
-                    'X-Token' => config('services.monobank.token'),
-                    'Accept'  => 'application/json',
-                ])->get('https://api.monobank.ua/api/merchant/pubkey');
-
-                if (!$resp->ok()) {
-                    Log::error('Failed to fetch Monobank pubkey', [
-                        'status' => $resp->status(),
-                        'body' => $resp->body()
-                    ]);
-                    throw new \RuntimeException('Failed to fetch Monobank pubkey');
-                }
-
-                return $resp->body();
-            });
-
-            $publicKey = openssl_pkey_get_public($pem);
-            if (!$publicKey) {
-                throw new \RuntimeException('Invalid public key format');
-            }
-
-            $signature = base64_decode($xSignBase64);
-            $verified = openssl_verify($rawBody, $signature, $publicKey, OPENSSL_ALGO_SHA256);
-
-            return $verified === 1;
-        } catch (\Throwable $e) {
-            Log::error('Monobank signature verification error', ['e' => $e->getMessage()]);
-            return false;
-        }
     }
 }
