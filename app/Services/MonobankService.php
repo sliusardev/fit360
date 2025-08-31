@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -81,20 +82,36 @@ class MonobankService
         }
 
         // Verify signature if present
-        $token = config('services.monobank.token');
-        $receivedSign = $request->header('X-Sign') ?? '';
-        if (!empty($receivedSign)) {
-            $expected = base64_encode(hash_hmac('sha256', $content, $token, true));
-            if (!hash_equals($expected, $receivedSign)) {
-                Log::warning('Monobank webhook: invalid signature', [
-                    'expected' => $expected,
-                    'received' => $receivedSign,
-                ]);
-                // Continue but mark as suspicious
+//        $token = config('services.monobank.token');
+        $receivedSign = $request->header('X-Sign', '');
+
+        if ($receivedSign !== '') {
+            $verified = $this->verifyMonobankSignature($content, $receivedSign);
+
+            if (!$verified) {
+                Cache::forget('mono_merchant_pubkey_pem');
+                $verified = $this->verifyMonobankSignature($content, $receivedSign);
+            }
+
+            if (!$verified) {
+                Log::warning('Monobank webhook: invalid ECDSA signature', ['x_sign' => $receivedSign]);
             }
         } else {
-            Log::info('Monobank webhook: no signature header provided');
+            Log::info('Monobank webhook: no X-Sign header');
         }
+
+//        if (!empty($receivedSign)) {
+//            $expected = base64_encode(hash_hmac('sha256', $content, $token, true));
+//            if (!hash_equals($expected, $receivedSign)) {
+//                Log::warning('Monobank webhook: invalid signature', [
+//                    'expected' => $expected,
+//                    'received' => $receivedSign,
+//                ]);
+//                // Continue but mark as suspicious
+//            }
+//        } else {
+//            Log::info('Monobank webhook: no signature header provided');
+//        }
 
         Log::info('Monobank webhook payload', $data);
 
@@ -140,6 +157,37 @@ class MonobankService
             'reversed', 'refund' => PaymentStatusEnum::REFUNDED,
             default => PaymentStatusEnum::PENDING,
         };
+    }
+
+    private function verifyMonobankSignature(string $rawBody, string $xSignBase64): bool
+    {
+        try {
+            $pem = Cache::remember('mono_merchant_pubkey_pem', 3600, function () {
+                $resp = Http::withHeaders([
+                    'X-Token' => config('services.monobank.token'),
+                    'Accept'  => 'application/json',
+                ])->get('https://api.monobank.ua/api/merchant/pubkey');
+
+                if (!$resp->ok()) {
+                    throw new \RuntimeException('Failed to fetch Monobank pubkey');
+                }
+                return base64_decode($resp->body());
+            });
+
+            if (!$pem) return false;
+
+            $publicKey = openssl_pkey_get_public($pem);
+            if ($publicKey === false) return false;
+
+            $signature = base64_decode($xSignBase64, true);
+            if ($signature === false) return false;
+
+            // У PHP для ECDSA достатньо SHA256 – OpenSSL сам визначає тип ключа (EC)
+            return openssl_verify($rawBody, $signature, $publicKey, OPENSSL_ALGO_SHA256) === 1;
+        } catch (\Throwable $e) {
+            Log::error('Monobank signature verification error', ['e' => $e->getMessage()]);
+            return false;
+        }
     }
 }
 
