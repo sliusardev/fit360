@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\PaymentStatusEnum;
 use App\Filament\Resources\PaymentResource\Pages;
+use App\Models\Activity;
 use App\Models\Payment;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -144,6 +145,8 @@ class PaymentResource extends Resource
             $details[] = '<div><strong>' . trans('dashboard.duration') . ':</strong> ' . $activity->duration_minutes . ' ' . trans('dashboard.minutes') . '</div>';
 
             // Activity trainers
+            $details[] = '<div><strong>' . trans('dashboard.location') . ':</strong> ' . $activity->location . '</div>';
+            $details[] = '<div><strong>' . trans('dashboard.description') . ':</strong> ' . $activity->description . '</div>';
             if ($activity->trainers && $activity->trainers->count() > 0) {
                 $trainerNames = $activity->trainers->pluck('name')->join(', ');
                 $details[] = '<div><strong>' . trans('dashboard.trainers') . ':</strong> ' . $trainerNames . '</div>';

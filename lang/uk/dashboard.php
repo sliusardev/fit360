@@ -250,4 +250,5 @@ return [
     'additional_information' => 'Додаткова інформація',
     'minutes' => 'хвилин',
     'id' => 'ID',
+    'service' => 'Послуга',
 ];
