@@ -109,11 +109,16 @@
                                 Клієнти, що заплатили онлайн
                             </h4>
                             <ul class="list-disc list-inside text-sm text-gray-600">
+                                <li class="grid grid-cols-3 gap-2 my-1 text-center">
+                                    <span class="bg-grey-100 p-2 rounded-1">Дата</span>
+                                    <span class="bg-green-100 p-2 rounded-1">Статус</span>
+                                    <span class="bg-blue-100 p-2 rounded-1">Клієнт</span>
+                                </li>
                                 @foreach($payments as $item)
-                                    <li class="flex justify-between">
-                                        <span class="bg-blue-100 p-2 rounded-1">{{$item['name']}}</span>
+                                    <li class="grid grid-cols-3 gap-2 my-1">
                                         <span class="bg-grey-100 p-2 rounded-1">{{$item['date']}}</span>
-                                        <span class="bg-green-100 p-2 rounded-1"> статус: {{$item['status']}}</span>
+                                        <span class="bg-green-100 p-2 rounded-1"> {{$item['status']}}</span>
+                                        <span class="bg-blue-100 p-2 rounded-1">{{$item['name']}}</span>
                                     </li>
                                 @endforeach
                             </ul>
