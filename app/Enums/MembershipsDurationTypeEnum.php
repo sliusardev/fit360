@@ -11,11 +11,6 @@ enum MembershipsDurationTypeEnum: string
 
     public static function allValues(): array
     {
-        return [
-            self::FIXED->value,
-            self::RECURRING->value,
-            self::LIFETIME->value,
-            self::TRIAL->value,
-        ];
+        return array_column(self::cases(), 'value');
     }
 }

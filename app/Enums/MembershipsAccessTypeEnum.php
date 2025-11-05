@@ -11,11 +11,6 @@ enum MembershipsAccessTypeEnum: string
 
     public static function allValues(): array
     {
-        return [
-            self::PUBLIC->value,
-            self::MEMBERS_ONLY->value,
-            self::INVITE_ONLY->value,
-            self::PRIVATE->value,
-        ];
+        return array_column(self::cases(), 'value');
     }
 }
