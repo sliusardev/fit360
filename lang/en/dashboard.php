@@ -90,6 +90,11 @@ return [
     'start_date' => 'Start Date',
     'end_date' => 'End Date',
     'visit_limit' => 'Visit Limit',
-
+    'membership_users' => 'Membership Users',
+    'membership_user' => 'Membership User',
+    'assign_user_to_membership' => 'Assign user to membership',
+    'assign' => 'Assign',
+    'active' => 'Active',
+    'expired' => 'Expired',
 
 ];
