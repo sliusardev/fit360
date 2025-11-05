@@ -129,6 +129,13 @@ class User extends Authenticatable implements FilamentUser
         return $this->belongsToMany(TelegraphChat::class, 'telegraph_chat_users');
     }
 
+    public function memberships(): BelongsToMany
+    {
+        return $this->belongsToMany(Membership::class)
+            ->withPivot('start_date', 'end_date', 'is_enabled')
+            ->withTimestamps();
+    }
+
     public function sendMessageToTelegram($message): void
     {
         $chat = $this->telegraphChats->first();

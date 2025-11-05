@@ -75,5 +75,21 @@ return [
     'pending' => 'Pending',
     'failed' => 'Failed',
     'refunded' => 'Refunded',
-    'created' => 'Created',
+
+    // Memberships
+    'gym' => 'Gym',
+    'group' => 'Group Classes',
+    'all' => 'All',
+    'unlimited' => 'Unlimited',
+    'visits' => 'Visits',
+    'memberships' => 'Memberships',
+    'membership' => 'Membership',
+    'access_type' => 'Access type',
+    'duration_type' => 'Duration type',
+    'duration_days' => 'Duration days',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'visit_limit' => 'Visit Limit',
+
+
 ];
