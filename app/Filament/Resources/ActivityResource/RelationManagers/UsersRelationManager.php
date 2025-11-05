@@ -8,17 +8,24 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UsersRelationManager extends RelationManager
 {
     protected static string $relationship = 'users';
 
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return trans('dashboard.users');
+    }
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('full_name')
+                    ->label(trans('dashboard.name'))
                     ->required()
                     ->maxLength(255),
             ]);
@@ -27,7 +34,7 @@ class UsersRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+            ->recordTitleAttribute('full_name')
             ->columns([
                 Tables\Columns\TextColumn::make('full_name')
                     ->label(trans('dashboard.name')),
