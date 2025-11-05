@@ -40,7 +40,7 @@ class Membership extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
-            ->withPivot('start_date', 'end_date', 'is_enabled')
+            ->withPivot('start_date', 'end_date', 'visit_limit', 'is_enabled')
             ->withTimestamps();
     }
 }
