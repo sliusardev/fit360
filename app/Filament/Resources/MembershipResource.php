@@ -128,14 +128,14 @@ class MembershipResource extends Resource
                     ->colors([
                         'primary',
                     ])
-                    ->formatStateUsing(fn (string $state) => trans('dashboard.' . $state)),
+                    ->formatStateUsing(fn (MembershipsAccessTypeEnum $state): string => trans('dashboard.' . $state->value)),
                 BadgeColumn::make('duration_type')
                     ->label(trans('dashboard.duration_type'))
                     ->colors([
-                        'success' => fn ($state) => $state === MembershipsDurationTypeEnum::UNLIMITED->value,
-                        'warning' => fn ($state) => $state === MembershipsDurationTypeEnum::VISITS->value,
+                        'success' => fn (MembershipsDurationTypeEnum $state): bool => $state === MembershipsDurationTypeEnum::UNLIMITED,
+                        'warning' => fn (MembershipsDurationTypeEnum $state): bool => $state === MembershipsDurationTypeEnum::VISITS,
                     ])
-                    ->formatStateUsing(fn (string $state) => trans('dashboard.' . $state)),
+                    ->formatStateUsing(fn (MembershipsDurationTypeEnum $state): string => trans('dashboard.' . $state->value)),
                 TextColumn::make('duration_days')
                     ->label(trans('dashboard.duration_days'))
                     ->toggleable(isToggledHiddenByDefault: true),
