@@ -64,8 +64,8 @@ class MembershipUserResource extends Resource
                             ->schema([
                                 Select::make('user_id')
                                     ->label(trans('dashboard.user') ?: 'User')
-                                    ->relationship('user', 'name')
-                                    ->options(User::query()->pluck('name', 'id'))
+                                    ->relationship('user', 'full_name')
+                                    ->options(User::query()->pluck('full_name', 'id'))
                                     ->searchable()
                                     ->preload()
                                     ->required(),

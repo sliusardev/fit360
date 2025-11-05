@@ -18,7 +18,7 @@ class UsersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('full_name')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -29,10 +29,10 @@ class UsersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('last_name'),
-                Tables\Columns\TextColumn::make('middle_name'),
-                Tables\Columns\TextColumn::make('phone'),
+                Tables\Columns\TextColumn::make('full_name')
+                    ->label(trans('dashboard.name')),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label(trans('dashboard.phone')),
             ])
             ->filters([
                 //
