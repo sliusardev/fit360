@@ -1,30 +1,30 @@
 {
   "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
-    "file": "assets/bootstrap-icons-BOrJxbIo.woff",
+    "file": "assets/bootstrap-icons-BeopsB42.woff",
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
   },
   "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
-    "file": "assets/bootstrap-icons-BtvjY1KL.woff2",
+    "file": "assets/bootstrap-icons-mSm7cUeB.woff2",
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Czt5Ev1S.css",
+    "file": "assets/app-Cxete9_m.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BIc0TEzI.js",
+    "file": "assets/app-DrZnnU5b.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/views/themes/simple-gray/assets/simple-gray.css": {
-    "file": "assets/simple-gray-jJLvKwPH.css",
+    "file": "assets/simple-gray-CNvMKHFr.css",
     "src": "resources/views/themes/simple-gray/assets/simple-gray.css",
     "isEntry": true
   },
   "resources/views/themes/simple-gray/assets/simple-gray.js": {
-    "file": "assets/simple-gray-DTu3iIGp.js",
+    "file": "assets/simple-gray-BGB1BYFJ.js",
     "name": "simple-gray",
     "src": "resources/views/themes/simple-gray/assets/simple-gray.js",
     "isEntry": true,
