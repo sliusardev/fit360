@@ -47,7 +47,7 @@
             </p>
         </a>
 
-        @if(auth()->user()->isAdmin())
+        @if(auth()->check() && auth()->user()->isAdmin())
             <a class="bg-gray-100 rounded-lg p-4 text-center" href="{{route('memberships.index')}}">
                 <i class="fas fa-ticket-alt text-gray-500 text-2xl mb-2">
                 </i>
