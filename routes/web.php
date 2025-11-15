@@ -79,10 +79,10 @@ Route::prefix('posts')->group(function () {
 
 Route::prefix('memberships')->group(function () {
     Route::get('/', [MembershipController::class, 'index'])->name('memberships.index');
-    Route::get('/{id}', [MembershipController::class, 'show'])->name('memberships.show');
     Route::get('/my', [MembershipController::class, 'my'])
         ->middleware(ClientMiddleware::class)
         ->name('memberships.my');
+    Route::get('/{id}', [MembershipController::class, 'show'])->name('memberships.show');
 });
 
 // Monobank pay init

@@ -41,6 +41,20 @@
             </li>
 
             <li class="mb-2">
+                <a class="text-gray-700" href="{{route('memberships.index')}}">
+                    Абонементи
+                </a>
+            </li>
+
+            @auth
+                <li class="mb-2">
+                    <a class="text-gray-700" href="{{route('memberships.my')}}">
+                        Мої абонементи
+                    </a>
+                </li>
+            @endauth
+
+            <li class="mb-2">
                 <a class="text-gray-700" href="{{route('price-list.index')}}">
                     Прайси Студії
                 </a>

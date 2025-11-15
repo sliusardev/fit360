@@ -15,11 +15,18 @@ class MembershipController extends Controller
 
     public function show(string $id)
     {
-
+        $membership = Membership::query()->findOrFail($id);
+        return themeView('memberships.show', compact('membership'));
     }
 
     public function my()
     {
+        $user = auth()->user();
+        $memberships = $user->memberships()
+            ->withPivot('start_date', 'end_date', 'visit_limit', 'is_enabled')
+            ->orderBy('membership_user.created_at', 'desc')
+            ->get();
 
+        return themeView('memberships.my', compact('memberships'));
     }
 }

@@ -68,7 +68,7 @@ class MonobankController extends Controller
 
     public function return($paymentId)
     {
-        $payment = Payment::query()->where('id', $paymentId)->with('activity')->first();
+        $payment = Payment::query()->where('id', $paymentId)->with(['activity', 'payable'])->first();
 
         if (!$payment) {
             return response()->redirectToRoute('activity')->with('error', 'Платіж не знайдено.');
@@ -86,6 +86,11 @@ class MonobankController extends Controller
 
         if ($payment->payable_type === 'App\Models\Activity' && $payment->activity) {
             return response()->redirectToRoute('activity.show', ['id' => $payment->activity->id])
+                ->with('info', 'Статус платежу: ' . $status);
+        }
+
+        if ($payment->payable_type === 'App\Models\Membership' && $payment->payable) {
+            return response()->redirectToRoute('memberships.show', ['id' => $payment->payable->id])
                 ->with('info', 'Статус платежу: ' . $status);
         }
 

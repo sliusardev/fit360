@@ -43,4 +43,36 @@ class Membership extends Model
             ->withPivot('start_date', 'end_date', 'visit_limit', 'is_enabled')
             ->withTimestamps();
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_enabled', true);
+    }
+
+    public function getAccessTypeLabel(): string
+    {
+        return match($this->access_type) {
+            MembershipsAccessTypeEnum::GYM => 'Тренажерний зал',
+            MembershipsAccessTypeEnum::GROUP => 'Групові заняття',
+            MembershipsAccessTypeEnum::ALL => 'Повний доступ',
+            default => 'Не визначено',
+        };
+    }
+
+    public function getDurationTypeLabel(): string
+    {
+        return match($this->duration_type) {
+            MembershipsDurationTypeEnum::UNLIMITED => 'Необмежений',
+            MembershipsDurationTypeEnum::VISITS => 'За відвідуваннями',
+            default => 'Не визначено',
+        };
+    }
+
+    public function getDurationLabel(): string
+    {
+        if ($this->duration_type === MembershipsDurationTypeEnum::VISITS) {
+            return $this->visit_limit . ' відвідувань';
+        }
+        return $this->duration_days . ' днів';
+    }
 }
