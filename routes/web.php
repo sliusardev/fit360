@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BeforeAfterController;
 use App\Http\Controllers\Billing\MonobankController;
 use App\Http\Controllers\FeedBackController;
+use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PriceListController;
@@ -74,6 +75,14 @@ Route::prefix('before-after')->group(function () {
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('posts.index');
     Route::get('/{slug}', [PostController::class, 'show'])->name('posts.show');
+});
+
+Route::prefix('memberships')->group(function () {
+    Route::get('/', [MembershipController::class, 'index'])->name('memberships.index');
+    Route::get('/{id}', [MembershipController::class, 'show'])->name('memberships.show');
+    Route::get('/my', [MembershipController::class, 'my'])
+        ->middleware(ClientMiddleware::class)
+        ->name('memberships.my');
 });
 
 // Monobank pay init
