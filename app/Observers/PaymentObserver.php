@@ -24,7 +24,7 @@ class PaymentObserver
             PaymentStatusEnum::PAID === $payment->status,
         ]);
         // Check if payment status changed to PAID
-        if ($payment->isDirty('status') && $payment->status === PaymentStatusEnum::PAID->value) {
+        if ($payment->isDirty('status') && $payment->status === PaymentStatusEnum::PAID) {
             $this->handleSuccessfulPayment($payment);
         }
     }
