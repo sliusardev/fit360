@@ -132,7 +132,7 @@ class User extends Authenticatable implements FilamentUser
     public function memberships(): BelongsToMany
     {
         return $this->belongsToMany(Membership::class)
-            ->withPivot('start_date', 'end_date', 'visit_limit', 'is_enabled')
+            ->withPivot('id', 'start_date', 'end_date', 'visit_limit', 'is_enabled')
             ->withTimestamps();
     }
 

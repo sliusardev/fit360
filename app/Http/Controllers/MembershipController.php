@@ -28,8 +28,9 @@ class MembershipController extends Controller
     {
         $user = auth()->user();
         $memberships = $user->memberships()
-            ->withPivot('start_date', 'end_date', 'visit_limit', 'is_enabled')
-            ->orderBy('membership_user.created_at', 'desc')
+            ->withPivot(['start_date', 'end_date', 'visit_limit', 'is_enabled'])
+            ->wherePivot('end_date', '>=', now()->toDateString())
+            ->orderByPivot('created_at', 'desc')
             ->get();
 
         return themeView('memberships.my', compact('memberships'));

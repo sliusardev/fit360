@@ -14,7 +14,8 @@
             @forelse($memberships as $membership)
                 @php
                     $pivot = $membership->pivot;
-                    $isActive = $membership->isUserActiveMembership(auth()->user());
+                    dd($membership->pivot);
+                    $isActive = $pivot->isActive();
                 @endphp
 
                 <div class="bg-white p-4 rounded-lg shadow {{ $isActive ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-400' }}">
@@ -85,7 +86,7 @@
             @empty
                 <div class="bg-white p-6 rounded-lg shadow text-center">
                     <i class="fas fa-ticket-alt text-gray-300 text-4xl mb-3"></i>
-                    <p class="text-gray-500 mb-4">У вас ще немає придбаних абонементів</p>
+                    <p class="text-gray-500 mb-4">У вас ще немає активних абонементів</p>
                     <a href="{{route('memberships.index')}}"
                        class="bg-[#383838] text-white px-6 py-2 rounded-md text-sm inline-block hover:bg-gray-700">
                         Переглянути абонементи
