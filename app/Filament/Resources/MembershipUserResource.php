@@ -84,12 +84,15 @@ class MembershipUserResource extends Resource
                                 DatePicker::make('start_date')
                                     ->label(trans('dashboard.start_date') ?: 'Start date')
                                     ->native(false)
-                                    ->required(),
+                                    ->required()
+                                    ->reactive(),
 
                                 DatePicker::make('end_date')
                                     ->label(trans('dashboard.end_date') ?: 'End date')
                                     ->native(false)
-                                    ->required(),
+                                    ->required()
+                                    ->minDate(fn (callable $get) => $get('start_date')) // UI constraint
+                                    ->rule(fn (callable $get) => $get('start_date') ? 'after_or_equal:' . $get('start_date') : null),
 
                                 TextInput::make('visit_limit')
                                     ->label(trans('dashboard.visit_limit') ?: 'Visit limit')
