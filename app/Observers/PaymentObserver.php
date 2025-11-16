@@ -35,6 +35,11 @@ class PaymentObserver
     private function handleSuccessfulPayment(Payment $payment): void
     {
         // Check if payment is for a membership
+
+        Log::info('membership handleSuccessfulPayment', [
+            $payment->payable_type
+        ]);
+
         if ($payment->payable_type === 'App\Models\Membership') {
             $membership = Membership::find($payment->payable_id);
 
