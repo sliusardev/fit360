@@ -55,13 +55,10 @@ class PaymentObserver
 
             // Calculate dates based on membership type
             $startDate = Carbon::now();
-            $endDate = null;
+            $endDate = $startDate->addDays($membership->duration_days);
             $visitLimit = null;
 
-            if ($membership->duration_type === MembershipsDurationTypeEnum::UNLIMITED) {
-                // For unlimited memberships, calculate end date based on duration_days
-                $endDate = Carbon::now()->addDays($membership->duration_days);
-            } elseif ($membership->duration_type === MembershipsDurationTypeEnum::VISITS) {
+            if ($membership->duration_type === MembershipsDurationTypeEnum::VISITS) {
                 // For visit-based memberships, set visit limit
                 $visitLimit = $membership->visit_limit;
             }
