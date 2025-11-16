@@ -73,15 +73,6 @@
                         </div>
                     @endif
 
-                    @if($isActive && $pivot->end_date)
-                        <div class="bg-blue-50 text-gray-800 text-xs px-3 py-2 rounded">
-                            <div class="text-gray-500 mb-1">Дата закінчення</div>
-                            <div class="text-sm font-semibold">
-                                {{ $pivot->end_date ? \Carbon\Carbon::parse($pivot->end_date)->format('d.m.Y') : 'Не визначено' }}
-                            </div>
-                        </div>
-                    @endif
-
                     <div class="mt-3 flex justify-between items-center">
                         <span class="text-xs text-gray-500">
                             Придбано: {{ \Carbon\Carbon::parse($pivot->created_at)->format('d.m.Y H:i') }}
