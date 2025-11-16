@@ -49,4 +49,9 @@ class MembershipUser extends Model
 
         return $this->end_date->isFuture() || $this->end_date->isToday();
     }
+
+    public function dateTime()
+    {
+        return $this->created_at->locale('uk')->isoFormat("D MMMM Y HH:mm, dddd");
+    }
 }

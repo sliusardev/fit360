@@ -74,16 +74,11 @@
                     @endif
 
                     @if($isActive && $pivot->end_date)
-                        @php
-                            $daysLeft = \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($pivot->end_date), false);
-                        @endphp
-                        @if($daysLeft >= 0)
-                            <div class="mt-3 p-2 bg-green-50 rounded text-center">
-                                <span class="text-sm text-green-700">
-                                    Залишилось днів: <strong>{{$daysLeft}}</strong>
-                                </span>
-                            </div>
-                        @endif
+                        <div class="mt-3 p-2 bg-green-50 rounded text-center">
+                            <span class="text-sm text-green-700">
+                                Залишилось днів: <strong>{{dateTimeLocaleFormat($pivot->end_date)}}</strong>
+                            </span>
+                        </div>
                     @endif
 
                     <div class="mt-3 flex justify-between items-center">
