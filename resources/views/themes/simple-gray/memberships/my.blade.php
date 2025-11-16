@@ -14,8 +14,6 @@
             @forelse($memberships as $membership)
                 @php
                     $pivot = $membership->pivot;
-                    dd($membership->pivot);
-                    $isActive = $pivot->isActive();
                 @endphp
 
                 <div class="bg-white p-4 rounded-lg shadow {{ $isActive ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-400' }}">
@@ -23,15 +21,15 @@
                         <h4 class="text-md font-semibold text-gray-800">
                             {{$membership->name}}
                         </h4>
-                        @if($isActive)
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded">
-                                Активний
-                            </span>
-                        @else
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-2 py-1 rounded">
-                                Неактивний
-                            </span>
-                        @endif
+{{--                        @if($isActive)--}}
+{{--                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded">--}}
+{{--                                Активний--}}
+{{--                            </span>--}}
+{{--                        @else--}}
+{{--                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-2 py-1 rounded">--}}
+{{--                                Неактивний--}}
+{{--                            </span>--}}
+{{--                        @endif--}}
                     </div>
 
                     @if($membership->description)
