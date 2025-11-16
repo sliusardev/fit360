@@ -54,7 +54,7 @@
             </div>
 
             @auth()
-                @if($alreadySubscribed)
+                @if(!$alreadySubscribed)
                         <div class="mt-4">
                             <form action="" method="POST" class="my-3">
                                 @csrf
@@ -73,7 +73,7 @@
                         </div>
                 @else
                     <div class="mt-4 text-center">
-                        <p class="text-sm text-red-600 mb-2">Ви вже маєте активний абонемент цього типу</p>
+                        <p class="text-sm text-green-600 mb-2">Ви вже маєте активний абонемент цього типу</p>
                         <a href="{{route('memberships.my')}}" class="bg-gray-800 text-white rounded-md px-6 py-2 text-sm inline-block hover:bg-gray-700">
                             Перейти до моїх абонементів
                         </a>
