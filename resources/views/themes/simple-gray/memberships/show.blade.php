@@ -54,22 +54,32 @@
             </div>
 
             @auth()
-                <div class="mt-4">
-                    <form action="" method="POST" class="my-3">
-                        @csrf
-                        <input type="hidden" name="payable_type" value="{{\App\Models\Membership::class}}">
-                        <input type="hidden" name="payable_id" value="{{$membership->id}}">
-                        <input type="hidden" name="amount" value="{{$membership->price}}">
-                        <input type="hidden" name="name" value="{{$membership->name}}">
+                @if($alreadySubscribed)
+                        <div class="mt-4">
+                            <form action="" method="POST" class="my-3">
+                                @csrf
+                                <input type="hidden" name="payable_type" value="{{\App\Models\Membership::class}}">
+                                <input type="hidden" name="payable_id" value="{{$membership->id}}">
+                                <input type="hidden" name="amount" value="{{$membership->price}}">
+                                <input type="hidden" name="name" value="{{$membership->name}}">
 
-                        <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn btn-lg bg-gray-800 text-white rounded-md w-full py-2 text-sm flex justify-center" aria-label="Придбати абонемент">
-                            <span>Придбати абонемент</span>
-                            <span class="badge text-bg-secondary">
+                                <button type="submit" formaction="{{ route('monobank.pay') }}" class="btn btn-lg bg-gray-800 text-white rounded-md w-full py-2 text-sm flex justify-center" aria-label="Придбати абонемент">
+                                    <span>Придбати абонемент</span>
+                                    <span class="badge text-bg-secondary">
                                 <img src="{{ asset('assets/images/billing/footer_plata_dark_bg@2x.png') }}" alt="Monobank Logo" class="img-fluid" style="height: 20px; margin-left: 8px;">
                             </span>
-                        </button>
-                    </form>
-                </div>
+                                </button>
+                            </form>
+                        </div>
+                @else
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-red-600 mb-2">Ви вже маєте активний абонемент цього типу</p>
+                        <a href="{{route('memberships.my')}}" class="bg-gray-800 text-white rounded-md px-6 py-2 text-sm inline-block hover:bg-gray-700">
+                            Перейти до моїх абонементів
+                        </a>
+                    </div>
+                @endif
+
             @else
                 <div class="mt-4 text-center">
                     <p class="text-sm text-gray-600 mb-2">Для придбання абонементу необхідно увійти до системи</p>
