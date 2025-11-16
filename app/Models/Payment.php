@@ -44,6 +44,11 @@ class Payment extends Model
         return $this->hasOne(Activity::class, 'id', 'payable_id');
     }
 
+    public function memberships(): HasOne
+    {
+        return $this->hasOne(Membership::class, 'id', 'payable_id');
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

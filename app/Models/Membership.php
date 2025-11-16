@@ -6,6 +6,7 @@ use App\Enums\MembershipsAccessTypeEnum;
 use App\Enums\MembershipsDurationTypeEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Membership extends Model
 {
@@ -74,5 +75,10 @@ class Membership extends Model
             return $this->visit_limit . ' відвідувань';
         }
         return $this->duration_days . ' днів';
+    }
+
+    public function payments(): morphMany
+    {
+        return $this->morphMany(Payment::class, 'payable')->with('user');
     }
 }

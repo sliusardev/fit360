@@ -16,6 +16,10 @@ class PaymentObserver
      */
     public function updated(Payment $payment): void
     {
+        Log::info('membership status', [
+            $payment->isDirty('status'),
+            $payment->status,
+        ]);
         // Check if payment status changed to PAID
         if ($payment->isDirty('status') && $payment->status === PaymentStatusEnum::PAID->value) {
             $this->handleSuccessfulPayment($payment);
