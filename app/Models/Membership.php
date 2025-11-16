@@ -81,4 +81,13 @@ class Membership extends Model
     {
         return $this->morphMany(Payment::class, 'payable')->with('user');
     }
+
+    public function isUserActiveMembership(User $user): bool
+    {
+        return $this->users()
+            ->where('user_id', $user->id)
+            ->wherePivot('is_enabled', true)
+            ->wherePivot('end_date', '>=', now())
+            ->exists();
+    }
 }

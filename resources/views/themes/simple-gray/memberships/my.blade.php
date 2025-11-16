@@ -14,8 +14,7 @@
             @forelse($memberships as $membership)
                 @php
                     $pivot = $membership->pivot;
-                    $isActive = $pivot->is_enabled &&
-                                ($pivot->end_date === null || \Carbon\Carbon::parse($pivot->end_date)->isFuture() || \Carbon\Carbon::parse($pivot->end_date)->isToday());
+                    $isActive = $membership->isUserActiveMembership(auth()->user());
                 @endphp
 
                 <div class="bg-white p-4 rounded-lg shadow {{ $isActive ? 'border-l-4 border-green-500' : 'border-l-4 border-gray-400' }}">
