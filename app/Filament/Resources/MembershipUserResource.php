@@ -136,17 +136,14 @@ class MembershipUserResource extends Resource
                 IconColumn::make('is_enabled')
                     ->label(trans('dashboard.is_enabled') ?: 'Enabled')
                     ->boolean(),
-                BadgeColumn::make('status')
+                TextColumn::make('status')
                     ->label(trans('dashboard.status') ?: 'Status')
-                    ->colors([
-                        'success' => fn ($record): bool => $record->is_active,
-                        'danger' => fn ($record): bool => ! $record->is_active,
-                    ])
-                    ->formatStateUsing(function ($record) {
-                        return $record->is_active
-                            ? (trans('dashboard.active') ?: 'Active')
-                            : (trans('dashboard.expired') ?: 'Expired');
-                    }),
+                    ->state(fn ($record) => $record->is_active
+                        ? (trans('dashboard.active') ?: 'Active')
+                        : (trans('dashboard.expired') ?: 'Expired')
+                    )
+                    ->badge()
+                    ->color(fn ($record) => $record->isActive() ? 'success' : 'danger'),
             ])
             ->filters([
                 Filter::make('active')

@@ -54,4 +54,9 @@ class MembershipUser extends Model
     {
         return $this->created_at->locale('uk')->isoFormat("D MMMM Y HH:mm, dddd");
     }
+
+    public function isActive()
+    {
+        return $this->end_date->isFuture();
+    }
 }
