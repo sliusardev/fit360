@@ -16,7 +16,8 @@ class MembershipController extends Controller
     public function show(string $id)
     {
         $membership = Membership::query()->where('id', $id)->with('users')->first();
-        $alreadySubscribed = $membership->users()->where('users.id', auth()->user()->id)->exists();
+        $subscribers = $membership->users;
+        $alreadySubscribed = $subscribers->where('id', auth()->user()->id)->first();
         return themeView('memberships.show', compact('membership', 'alreadySubscribed'));
     }
 
