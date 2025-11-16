@@ -13,8 +13,3 @@ function themeSettings(): array
 {
     return ThemeService::themeSettings(SettingService::value('theme'));
 }
-
-function dateTimeLocaleFormat(Carbon $dateTime): string
-{
-    return $dateTime->locale(app()->getLocale())->isoFormat("D MMMM Y HH:mm, dddd");
-}
