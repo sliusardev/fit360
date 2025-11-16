@@ -47,15 +47,15 @@
             </p>
         </a>
 
-        @if(auth()->check() && auth()->user()->isAdmin())
-            <a class="bg-gray-100 rounded-lg p-4 text-center" href="{{route('memberships.index')}}">
-                <i class="fas fa-ticket-alt text-gray-500 text-2xl mb-2">
-                </i>
-                <p class="text-sm font-semibold">
-                    Абонементи
-                </p>
-            </a>
+        <a class="bg-gray-100 rounded-lg p-4 text-center" href="{{route('memberships.index')}}">
+            <i class="fas fa-ticket-alt text-gray-500 text-2xl mb-2">
+            </i>
+            <p class="text-sm font-semibold">
+                Абонементи
+            </p>
+        </a>
 
+        @auth
             <a class="bg-gray-200 rounded-lg p-4 text-center" href="{{route('memberships.my')}}">
                 <i class="fas fa-id-card text-gray-500 text-2xl mb-2">
                 </i>
@@ -63,9 +63,7 @@
                     Мої Абонементи
                 </p>
             </a>
-        @endif
 
-        @auth
             <a class="bg-gray-100 rounded-lg p-4 text-center" href="{{route('activity.myArchive')}}">
                 <i class="fas fa-check-circle text-gray-500 text-2xl mb-2">
                 </i>
