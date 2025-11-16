@@ -96,7 +96,7 @@ class MembershipResource extends Resource
                                     ->label(trans('dashboard.duration_days'))
                                     ->numeric()
                                     ->minValue(1)
-                                    ->visible(fn (callable $get) => $get('duration_type') === MembershipsDurationTypeEnum::UNLIMITED->value),
+                                    ->required(),
 
                                 TextInput::make('visit_limit')
                                     ->label(trans('dashboard.visit_limit'))
